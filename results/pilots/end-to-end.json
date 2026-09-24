@@ -1,0 +1,275 @@
+{
+  "cases": [
+    {
+      "case": "structured-4",
+      "guards": 4,
+      "legal_masks": 6,
+      "maximum_delta_bytes": [
+        0
+      ],
+      "square_sums": [
+        "0"
+      ],
+      "proofs": [
+        {
+          "terms": 5,
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 9,
+          "peak_states": 3
+        }
+      ],
+      "capacity_bytes": [
+        48
+      ]
+    },
+    {
+      "case": "structured-8",
+      "guards": 8,
+      "legal_masks": 36,
+      "maximum_delta_bytes": [
+        0
+      ],
+      "square_sums": [
+        "0"
+      ],
+      "proofs": [
+        {
+          "terms": 10,
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 17,
+          "peak_states": 3
+        }
+      ],
+      "capacity_bytes": [
+        48
+      ]
+    },
+    {
+      "case": "structured-free",
+      "guards": 4,
+      "legal_masks": 16,
+      "maximum_delta_bytes": [
+        32
+      ],
+      "square_sums": [
+        "12288"
+      ],
+      "proofs": [
+        {
+          "terms": 5,
+          "frontier_width": 1,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 2
+        }
+      ],
+      "capacity_bytes": [
+        48
+      ]
+    },
+    {
+      "case": "grid-3",
+      "guards": 9,
+      "legal_masks": 512,
+      "maximum_delta_bytes": [
+        8
+      ],
+      "square_sums": [
+        "3072"
+      ],
+      "proofs": [
+        {
+          "terms": 6,
+          "frontier_width": 4,
+          "open_count_blocks": 0,
+          "total_states": 62,
+          "peak_states": 14
+        }
+      ],
+      "capacity_bytes": [
+        8
+      ]
+    },
+    {
+      "case": "cycle-7",
+      "guards": 7,
+      "legal_masks": 128,
+      "maximum_delta_bytes": [
+        4
+      ],
+      "square_sums": [
+        "2032"
+      ],
+      "proofs": [
+        {
+          "terms": 15,
+          "frontier_width": 3,
+          "open_count_blocks": 0,
+          "total_states": 28,
+          "peak_states": 5
+        }
+      ],
+      "capacity_bytes": [
+        8
+      ]
+    },
+    {
+      "case": "triangle-free",
+      "guards": 3,
+      "legal_masks": 8,
+      "maximum_delta_bytes": [
+        8
+      ],
+      "square_sums": [
+        "384"
+      ],
+      "proofs": [
+        {
+          "terms": 6,
+          "frontier_width": 2,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 4
+        }
+      ],
+      "capacity_bytes": [
+        8
+      ]
+    },
+    {
+      "case": "triangle-2:4",
+      "guards": 12,
+      "legal_masks": 216,
+      "maximum_delta_bytes": [
+        8
+      ],
+      "square_sums": [
+        "10368"
+      ],
+      "proofs": [
+        {
+          "terms": 6,
+          "frontier_width": 2,
+          "open_count_blocks": 1,
+          "total_states": 45,
+          "peak_states": 8
+        }
+      ],
+      "capacity_bytes": [
+        8
+      ]
+    },
+    {
+      "case": "bitmap-full",
+      "guards": 6,
+      "legal_masks": 64,
+      "maximum_delta_bytes": [
+        0
+      ],
+      "square_sums": [
+        "10176"
+      ],
+      "proofs": [
+        {
+          "terms": 7,
+          "frontier_width": 1,
+          "open_count_blocks": 0,
+          "total_states": 12,
+          "peak_states": 2
+        }
+      ],
+      "capacity_bytes": [
+        28
+      ]
+    },
+    {
+      "case": "bitmap-overfetch",
+      "guards": 6,
+      "legal_masks": 64,
+      "maximum_delta_bytes": [
+        0
+      ],
+      "square_sums": [
+        "6400"
+      ],
+      "proofs": [
+        {
+          "terms": 11,
+          "frontier_width": 5,
+          "open_count_blocks": 0,
+          "total_states": 12,
+          "peak_states": 2
+        }
+      ],
+      "capacity_bytes": [
+        28
+      ]
+    },
+    {
+      "case": "coordinate-overfetch",
+      "guards": 6,
+      "legal_masks": 64,
+      "maximum_delta_bytes": [
+        32
+      ],
+      "square_sums": [
+        "9216"
+      ],
+      "proofs": [
+        {
+          "terms": 11,
+          "frontier_width": 5,
+          "open_count_blocks": 0,
+          "total_states": 12,
+          "peak_states": 2
+        }
+      ],
+      "capacity_bytes": [
+        60
+      ]
+    },
+    {
+      "case": "hierarchy",
+      "guards": 4,
+      "legal_masks": 6,
+      "maximum_delta_bytes": [
+        0,
+        0
+      ],
+      "square_sums": [
+        "0",
+        "0"
+      ],
+      "proofs": [
+        {
+          "terms": 0,
+          "frontier_width": 0,
+          "open_count_blocks": 1,
+          "total_states": 9,
+          "peak_states": 3
+        },
+        {
+          "terms": 5,
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 9,
+          "peak_states": 3
+        }
+      ],
+      "capacity_bytes": [
+        48,
+        48
+      ]
+    }
+  ],
+  "total_masks": 1120,
+  "codec_roundtrips": 1808,
+  "random_seed": 49038,
+  "cpu_seconds": 0.04184933200000002,
+  "wall_seconds": 0.04185491099997307,
+  "peak_rss_kib": 93736,
+  "worker_limit": 1,
+  "address_space_limit_bytes": 1073741824
+}

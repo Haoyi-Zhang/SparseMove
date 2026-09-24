@@ -1,0 +1,6 @@
+promise,vertices,pair_count,mask_count,zero_bound_true,zero_bound_false
+free,2,1,4,0,1
+free,3,12,96,1,11
+free,4,192,3072,24,168
+nm,2,1,36,0,1
+nm,3,12,2592,1,11

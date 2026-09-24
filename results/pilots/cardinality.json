@@ -1,0 +1,17 @@
+{
+  "random_seed": 49037,
+  "moment_cases": 960,
+  "enumerated_legal_masks": 66920,
+  "constructive_witnesses": 947,
+  "literal_residency_masks": 16,
+  "structured_blocks": 32,
+  "structured_legal_masks": "7958661109946400884391936",
+  "structured_surviving_terms": 160,
+  "structured_exact_square_sum": 0,
+  "negative_control_free_support_nonzero": true,
+  "cpu_seconds": 0.5848431409999999,
+  "wall_seconds": 0.5852085690000877,
+  "peak_rss_kib": 92716,
+  "worker_limit": 1,
+  "address_space_limit_bytes": 1073741824
+}

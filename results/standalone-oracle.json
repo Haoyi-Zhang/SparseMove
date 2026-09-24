@@ -1,0 +1,17 @@
+{
+  "campaign_levels": 1817,
+  "campaign_masks": 256074,
+  "campaign_pairs": 1730,
+  "cpu_seconds": 8.287645787,
+  "implementation_imports": [],
+  "max_reduction_events": 34,
+  "peak_rss_kib": 142848,
+  "reduction_masks": 5800,
+  "reduction_pairs": 218,
+  "resident_codec_masks": 13997,
+  "status": "passed",
+  "swap_events": 0,
+  "wall_seconds": 8.299143318999995,
+  "zero_bound_false": 192,
+  "zero_bound_true": 26
+}

@@ -1,0 +1,56 @@
+{
+  "part": "reduction",
+  "pair_count": 218,
+  "mask_count": 5800,
+  "zero_bound_true": 26,
+  "zero_bound_false": 192,
+  "max_events": 34,
+  "capacity_bytes": 8,
+  "cpu_seconds": 1.8975735009999999,
+  "wall_seconds": 1.8975974240000255,
+  "peak_rss_kib": 92980,
+  "swap_events": 0,
+  "workers": 1,
+  "rows": [
+    {
+      "promise": "free",
+      "vertices": 2,
+      "pair_count": 1,
+      "mask_count": 4,
+      "zero_bound_true": 0,
+      "zero_bound_false": 1
+    },
+    {
+      "promise": "free",
+      "vertices": 3,
+      "pair_count": 12,
+      "mask_count": 96,
+      "zero_bound_true": 1,
+      "zero_bound_false": 11
+    },
+    {
+      "promise": "free",
+      "vertices": 4,
+      "pair_count": 192,
+      "mask_count": 3072,
+      "zero_bound_true": 24,
+      "zero_bound_false": 168
+    },
+    {
+      "promise": "nm",
+      "vertices": 2,
+      "pair_count": 1,
+      "mask_count": 36,
+      "zero_bound_true": 0,
+      "zero_bound_false": 1
+    },
+    {
+      "promise": "nm",
+      "vertices": 3,
+      "pair_count": 12,
+      "mask_count": 2592,
+      "zero_bound_true": 1,
+      "zero_bound_false": 11
+    }
+  ]
+}

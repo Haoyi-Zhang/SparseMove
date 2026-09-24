@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "case": "grid-4",
+      "guards": 16,
+      "oracle_masks": 65536,
+      "max_delta_bytes": 12,
+      "frontier_width": 5,
+      "states": 256
+    },
+    {
+      "case": "grid-4-fixed-4",
+      "guards": 16,
+      "oracle_masks": 1820,
+      "max_delta_bytes": 12,
+      "frontier_width": 5,
+      "states": 495
+    },
+    {
+      "case": "cycle-12",
+      "guards": 12,
+      "oracle_masks": 4096,
+      "max_delta_bytes": 4,
+      "frontier_width": 3,
+      "states": 53
+    }
+  ],
+  "equality_witness_pairs": 12,
+  "negative_controls": {
+    "density_histogram_tie_but_nonzero_regression": true,
+    "every_proper_cycle_support_misses_regression": true
+  },
+  "cpu_seconds": 0.17213927199999995,
+  "wall_seconds": 0.1721485200000643,
+  "peak_rss_kib": 92584,
+  "worker_limit": 1,
+  "address_space_limit_bytes": 1073741824
+}

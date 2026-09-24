@@ -1,0 +1,26 @@
+{
+  "cases": 144,
+  "cpu_seconds": 2.3304969659999997,
+  "exact_square_checks": 192,
+  "guard_renaming_checks": 3219,
+  "level_mask_checks": 3219,
+  "mask_checks": 2562,
+  "maximum_certificate_states": 86,
+  "maximum_legal_masks_per_case": 256,
+  "maximum_signature_terms": 68,
+  "peak_rss_kib": 94888,
+  "proof_cases": 72,
+  "seed": 20260921,
+  "self_equality_checks": 192,
+  "sign_classes": {
+    "equal": 23,
+    "mixed": 52,
+    "negative_only": 56,
+    "positive_only": 61
+  },
+  "source_target_swap_checks": 3219,
+  "status": "passed",
+  "swap_events": 0,
+  "upper_certificate_checks": 96,
+  "wall_seconds": 2.330601290000004
+}

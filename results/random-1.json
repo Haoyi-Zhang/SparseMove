@@ -1,0 +1,2650 @@
+{
+  "part": "random-1",
+  "case_count": 60,
+  "mask_count": 5831,
+  "resident_numeric_masks": 448,
+  "cpu_seconds": 0.37062208500000005,
+  "wall_seconds": 0.3711188939996646,
+  "peak_rss_kib": 93612,
+  "swap_events": 0,
+  "workers": 1,
+  "rows": [
+    {
+      "case": "random-60",
+      "guards": 6,
+      "events": 14,
+      "levels": 1,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        72
+      ],
+      "scopes_source": 15,
+      "scopes_target": 10,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 130496,
+          "min_delta": -72,
+          "max_delta": -16,
+          "positive_masks": 0,
+          "negative_masks": 64,
+          "terms": 12,
+          "iid_histogram": {
+            "1": 36,
+            "2": -24,
+            "3": -4
+          },
+          "frontier_width": 6,
+          "open_count_blocks": 0,
+          "total_states": 28,
+          "peak_states": 10,
+          "attaining_mask": 30
+        }
+      ],
+      "cpu_seconds": 0.0014289100000000055,
+      "wall_seconds": 0.004111064999960945
+    },
+    {
+      "case": "random-61",
+      "guards": 7,
+      "events": 9,
+      "levels": 1,
+      "legal_masks": 35,
+      "enumerated_masks": 35,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92
+      ],
+      "scopes_source": 8,
+      "scopes_target": 8,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 59504,
+          "min_delta": 8,
+          "max_delta": 68,
+          "positive_masks": 35,
+          "negative_masks": 0,
+          "terms": 21,
+          "iid_histogram": {
+            "1": 72,
+            "3": 8,
+            "4": 32,
+            "5": -16,
+            "2": -20
+          },
+          "frontier_width": 16,
+          "open_count_blocks": 1,
+          "total_states": 68,
+          "peak_states": 22,
+          "attaining_mask": 25
+        }
+      ],
+      "cpu_seconds": 0.004001034999999986,
+      "wall_seconds": 0.003912728000614152
+    },
+    {
+      "case": "random-62",
+      "guards": 8,
+      "events": 18,
+      "levels": 2,
+      "legal_masks": 256,
+      "enumerated_masks": 256,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92,
+        232
+      ],
+      "scopes_source": 12,
+      "scopes_target": 14,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 9,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 351872,
+          "min_delta": -112,
+          "max_delta": 60,
+          "positive_masks": 61,
+          "negative_masks": 181,
+          "terms": 25,
+          "iid_histogram": {
+            "1": -212,
+            "3": -12,
+            "4": 60,
+            "2": 48
+          },
+          "frontier_width": 15,
+          "open_count_blocks": 0,
+          "total_states": 64,
+          "peak_states": 21,
+          "attaining_mask": 66
+        }
+      ],
+      "cpu_seconds": 0.011947554000000027,
+      "wall_seconds": 0.014194643999871914
+    },
+    {
+      "case": "random-63",
+      "guards": 9,
+      "events": 11,
+      "levels": 1,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        56
+      ],
+      "scopes_source": 7,
+      "scopes_target": 15,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 180480,
+          "min_delta": -48,
+          "max_delta": 12,
+          "positive_masks": 27,
+          "negative_masks": 458,
+          "terms": 18,
+          "iid_histogram": {
+            "1": 64,
+            "2": -12,
+            "3": -8,
+            "4": -8
+          },
+          "frontier_width": 7,
+          "open_count_blocks": 0,
+          "total_states": 70,
+          "peak_states": 20,
+          "attaining_mask": 253
+        }
+      ],
+      "cpu_seconds": 0.011981874999999975,
+      "wall_seconds": 0.01137001099959889
+    },
+    {
+      "case": "random-64",
+      "guards": 2,
+      "events": 3,
+      "levels": 1,
+      "legal_masks": 2,
+      "enumerated_masks": 2,
+      "resident_numeric_masks": 2,
+      "capacity": [
+        28
+      ],
+      "scopes_source": 3,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 160,
+          "min_delta": -4,
+          "max_delta": 12,
+          "positive_masks": 1,
+          "negative_masks": 1,
+          "terms": 3,
+          "iid_histogram": {
+            "1": 48,
+            "2": -20
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 4,
+          "peak_states": 2,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0028851300000000135,
+      "wall_seconds": 0.0005610429998341715
+    },
+    {
+      "case": "random-65",
+      "guards": 3,
+      "events": 5,
+      "levels": 2,
+      "legal_masks": 8,
+      "enumerated_masks": 8,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        64,
+        92
+      ],
+      "scopes_source": 7,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 4,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 14016,
+          "min_delta": -60,
+          "max_delta": -20,
+          "positive_masks": 0,
+          "negative_masks": 8,
+          "terms": 3,
+          "iid_histogram": {
+            "1": -40
+          },
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 4,
+          "peak_states": 1,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.0010942130000000105,
+      "wall_seconds": 0.002010651000091457
+    },
+    {
+      "case": "random-66",
+      "guards": 4,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 6,
+      "enumerated_masks": 6,
+      "resident_numeric_masks": 6,
+      "capacity": [
+        24
+      ],
+      "scopes_source": 4,
+      "scopes_target": 5,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 112,
+          "min_delta": -4,
+          "max_delta": 8,
+          "positive_masks": 2,
+          "negative_masks": 2,
+          "terms": 6,
+          "iid_histogram": {
+            "1": 16,
+            "2": -4,
+            "4": -4
+          },
+          "frontier_width": 3,
+          "open_count_blocks": 1,
+          "total_states": 12,
+          "peak_states": 4,
+          "attaining_mask": 5
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0013037379994784715
+    },
+    {
+      "case": "random-67",
+      "guards": 5,
+      "events": 7,
+      "levels": 1,
+      "legal_masks": 10,
+      "enumerated_masks": 10,
+      "resident_numeric_masks": 10,
+      "capacity": [
+        84
+      ],
+      "scopes_source": 5,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 9184,
+          "min_delta": 12,
+          "max_delta": 44,
+          "positive_masks": 10,
+          "negative_masks": 0,
+          "terms": 9,
+          "iid_histogram": {
+            "1": 40,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": -8
+          },
+          "frontier_width": 5,
+          "open_count_blocks": 1,
+          "total_states": 17,
+          "peak_states": 5,
+          "attaining_mask": 6
+        }
+      ],
+      "cpu_seconds": 0.003999843999999975,
+      "wall_seconds": 0.0023000449991741334
+    },
+    {
+      "case": "random-68",
+      "guards": 6,
+      "events": 16,
+      "levels": 2,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        76,
+        176
+      ],
+      "scopes_source": 20,
+      "scopes_target": 18,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 7,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 531968,
+          "min_delta": -172,
+          "max_delta": 8,
+          "positive_masks": 2,
+          "negative_masks": 62,
+          "terms": 19,
+          "iid_histogram": {
+            "1": -176,
+            "2": -20,
+            "3": -8,
+            "4": 8,
+            "5": 20
+          },
+          "frontier_width": 9,
+          "open_count_blocks": 0,
+          "total_states": 28,
+          "peak_states": 8,
+          "attaining_mask": 1
+        }
+      ],
+      "cpu_seconds": 0.00789446100000002,
+      "wall_seconds": 0.006744441999217088
+    },
+    {
+      "case": "random-69",
+      "guards": 7,
+      "events": 13,
+      "levels": 1,
+      "legal_masks": 128,
+      "enumerated_masks": 128,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        112
+      ],
+      "scopes_source": 4,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 123856,
+          "min_delta": -36,
+          "max_delta": 80,
+          "positive_masks": 84,
+          "negative_masks": 33,
+          "terms": 28,
+          "iid_histogram": {
+            "1": 112,
+            "3": -28,
+            "4": -32,
+            "2": 56,
+            "7": -28
+          },
+          "frontier_width": 19,
+          "open_count_blocks": 0,
+          "total_states": 81,
+          "peak_states": 28,
+          "attaining_mask": 127
+        }
+      ],
+      "cpu_seconds": 0.003992092000000003,
+      "wall_seconds": 0.006093172999499075
+    },
+    {
+      "case": "random-70",
+      "guards": 8,
+      "events": 22,
+      "levels": 1,
+      "legal_masks": 70,
+      "enumerated_masks": 70,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        292
+      ],
+      "scopes_source": 18,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 930768,
+          "min_delta": 52,
+          "max_delta": 176,
+          "positive_masks": 70,
+          "negative_masks": 0,
+          "terms": 29,
+          "iid_histogram": {
+            "1": 152,
+            "2": 36,
+            "3": 4,
+            "4": -20,
+            "5": -4,
+            "6": 4
+          },
+          "frontier_width": 20,
+          "open_count_blocks": 1,
+          "total_states": 156,
+          "peak_states": 53,
+          "attaining_mask": 232
+        }
+      ],
+      "cpu_seconds": 0.011969255999999928,
+      "wall_seconds": 0.009397005999744579
+    },
+    {
+      "case": "random-71",
+      "guards": 9,
+      "events": 15,
+      "levels": 2,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        112,
+        196
+      ],
+      "scopes_source": 11,
+      "scopes_target": 18,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 10,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 320192,
+          "min_delta": -56,
+          "max_delta": 88,
+          "positive_masks": 286,
+          "negative_masks": 185,
+          "terms": 25,
+          "iid_histogram": {
+            "1": -124,
+            "2": 68,
+            "3": 44,
+            "7": -24,
+            "8": 16
+          },
+          "frontier_width": 11,
+          "open_count_blocks": 0,
+          "total_states": 113,
+          "peak_states": 28,
+          "attaining_mask": 131
+        }
+      ],
+      "cpu_seconds": 0.019999148000000022,
+      "wall_seconds": 0.01971423600025446
+    },
+    {
+      "case": "random-72",
+      "guards": 2,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 4,
+      "enumerated_masks": 4,
+      "resident_numeric_masks": 4,
+      "capacity": [
+        20
+      ],
+      "scopes_source": 4,
+      "scopes_target": 5,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 256,
+          "min_delta": -8,
+          "max_delta": 8,
+          "positive_masks": 2,
+          "negative_masks": 2,
+          "terms": 1,
+          "iid_histogram": {
+            "1": 16
+          },
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 3,
+          "peak_states": 1,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.000894603999768151
+    },
+    {
+      "case": "random-73",
+      "guards": 3,
+      "events": 8,
+      "levels": 1,
+      "legal_masks": 3,
+      "enumerated_masks": 3,
+      "resident_numeric_masks": 3,
+      "capacity": [
+        108
+      ],
+      "scopes_source": 5,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 2864,
+          "min_delta": 28,
+          "max_delta": 36,
+          "positive_masks": 3,
+          "negative_masks": 0,
+          "terms": 5,
+          "iid_histogram": {
+            "1": 52,
+            "2": 8
+          },
+          "frontier_width": 2,
+          "open_count_blocks": 1,
+          "total_states": 7,
+          "peak_states": 3,
+          "attaining_mask": 1
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0009236879996024072
+    },
+    {
+      "case": "random-74",
+      "guards": 4,
+      "events": 8,
+      "levels": 2,
+      "legal_masks": 16,
+      "enumerated_masks": 16,
+      "resident_numeric_masks": 16,
+      "capacity": [
+        60,
+        88
+      ],
+      "scopes_source": 9,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 5,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 15424,
+          "min_delta": -56,
+          "max_delta": 24,
+          "positive_masks": 2,
+          "negative_masks": 13,
+          "terms": 7,
+          "iid_histogram": {
+            "1": -60,
+            "2": -20
+          },
+          "frontier_width": 2,
+          "open_count_blocks": 0,
+          "total_states": 10,
+          "peak_states": 4,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.007999427000000003,
+      "wall_seconds": 0.004732250000415661
+    },
+    {
+      "case": "random-75",
+      "guards": 5,
+      "events": 10,
+      "levels": 1,
+      "legal_masks": 32,
+      "enumerated_masks": 32,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        76
+      ],
+      "scopes_source": 12,
+      "scopes_target": 10,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 17344,
+          "min_delta": -40,
+          "max_delta": 12,
+          "positive_masks": 2,
+          "negative_masks": 29,
+          "terms": 16,
+          "iid_histogram": {
+            "1": 44,
+            "2": -36,
+            "3": -16
+          },
+          "frontier_width": 9,
+          "open_count_blocks": 0,
+          "total_states": 29,
+          "peak_states": 13,
+          "attaining_mask": 10
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0028185950004626648
+    },
+    {
+      "case": "random-76",
+      "guards": 6,
+      "events": 7,
+      "levels": 1,
+      "legal_masks": 20,
+      "enumerated_masks": 20,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        80
+      ],
+      "scopes_source": 8,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 31648,
+          "min_delta": 16,
+          "max_delta": 52,
+          "positive_masks": 20,
+          "negative_masks": 0,
+          "terms": 16,
+          "iid_histogram": {
+            "1": 52,
+            "2": -32,
+            "3": 40,
+            "4": -16,
+            "6": 16
+          },
+          "frontier_width": 10,
+          "open_count_blocks": 1,
+          "total_states": 46,
+          "peak_states": 17,
+          "attaining_mask": 7
+        }
+      ],
+      "cpu_seconds": 0.00400062499999998,
+      "wall_seconds": 0.0026705720001700683
+    },
+    {
+      "case": "random-77",
+      "guards": 7,
+      "events": 13,
+      "levels": 2,
+      "legal_masks": 128,
+      "enumerated_masks": 128,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        96,
+        184
+      ],
+      "scopes_source": 12,
+      "scopes_target": 13,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 510400,
+          "min_delta": -140,
+          "max_delta": 24,
+          "positive_masks": 5,
+          "negative_masks": 120,
+          "terms": 27,
+          "iid_histogram": {
+            "1": -168,
+            "2": -32,
+            "3": 4,
+            "4": 76,
+            "5": -20
+          },
+          "frontier_width": 17,
+          "open_count_blocks": 0,
+          "total_states": 67,
+          "peak_states": 20,
+          "attaining_mask": 8
+        }
+      ],
+      "cpu_seconds": 0.00800012800000005,
+      "wall_seconds": 0.008862553999279044
+    },
+    {
+      "case": "random-78",
+      "guards": 8,
+      "events": 11,
+      "levels": 1,
+      "legal_masks": 36,
+      "enumerated_masks": 36,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92
+      ],
+      "scopes_source": 8,
+      "scopes_target": 5,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 11696,
+          "min_delta": -36,
+          "max_delta": 8,
+          "positive_masks": 3,
+          "negative_masks": 33,
+          "terms": 20,
+          "iid_histogram": {
+            "1": 68,
+            "2": -28,
+            "3": 20,
+            "4": -24,
+            "6": 4
+          },
+          "frontier_width": 11,
+          "open_count_blocks": 1,
+          "total_states": 51,
+          "peak_states": 14,
+          "attaining_mask": 108
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0037322460002542357
+    },
+    {
+      "case": "random-79",
+      "guards": 9,
+      "events": 25,
+      "levels": 1,
+      "legal_masks": 126,
+      "enumerated_masks": 126,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        468
+      ],
+      "scopes_source": 24,
+      "scopes_target": 25,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 5347664,
+          "min_delta": 132,
+          "max_delta": 264,
+          "positive_masks": 126,
+          "negative_masks": 0,
+          "terms": 32,
+          "iid_histogram": {
+            "1": 292,
+            "2": 76,
+            "3": -16,
+            "4": -32,
+            "5": 16
+          },
+          "frontier_width": 20,
+          "open_count_blocks": 1,
+          "total_states": 172,
+          "peak_states": 53,
+          "attaining_mask": 58
+        }
+      ],
+      "cpu_seconds": 0.011998449000000022,
+      "wall_seconds": 0.013822084999446815
+    },
+    {
+      "case": "random-80",
+      "guards": 2,
+      "events": 5,
+      "levels": 2,
+      "legal_masks": 4,
+      "enumerated_masks": 4,
+      "resident_numeric_masks": 4,
+      "capacity": [
+        44,
+        40
+      ],
+      "scopes_source": 5,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 3,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 480,
+          "min_delta": -16,
+          "max_delta": -4,
+          "positive_masks": 0,
+          "negative_masks": 4,
+          "terms": 2,
+          "iid_histogram": {
+            "1": -12
+          },
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 3,
+          "peak_states": 1,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0012509600001067156
+    },
+    {
+      "case": "random-81",
+      "guards": 3,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 8,
+      "enumerated_masks": 8,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        32
+      ],
+      "scopes_source": 6,
+      "scopes_target": 8,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 7440,
+          "min_delta": -40,
+          "max_delta": -16,
+          "positive_masks": 0,
+          "negative_masks": 8,
+          "terms": 7,
+          "iid_histogram": {
+            "1": 20,
+            "2": -16,
+            "3": -4
+          },
+          "frontier_width": 3,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 4,
+          "attaining_mask": 1
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.001582287000019278
+    },
+    {
+      "case": "random-82",
+      "guards": 4,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 6,
+      "enumerated_masks": 6,
+      "resident_numeric_masks": 6,
+      "capacity": [
+        84
+      ],
+      "scopes_source": 5,
+      "scopes_target": 4,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 3568,
+          "min_delta": 8,
+          "max_delta": 28,
+          "positive_masks": 6,
+          "negative_masks": 0,
+          "terms": 5,
+          "iid_histogram": {
+            "1": 12,
+            "2": 16,
+            "3": -20
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 11,
+          "peak_states": 4,
+          "attaining_mask": 3
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.00138417899961496
+    },
+    {
+      "case": "random-83",
+      "guards": 5,
+      "events": 12,
+      "levels": 2,
+      "legal_masks": 32,
+      "enumerated_masks": 32,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        80,
+        96
+      ],
+      "scopes_source": 10,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 6,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 4736,
+          "min_delta": -16,
+          "max_delta": 28,
+          "positive_masks": 14,
+          "negative_masks": 15,
+          "terms": 10,
+          "iid_histogram": {
+            "1": -32,
+            "2": 12,
+            "3": -40,
+            "5": 24
+          },
+          "frontier_width": 5,
+          "open_count_blocks": 0,
+          "total_states": 15,
+          "peak_states": 5,
+          "attaining_mask": 8
+        }
+      ],
+      "cpu_seconds": 0.004000934999999983,
+      "wall_seconds": 0.0037907640007688315
+    },
+    {
+      "case": "random-84",
+      "guards": 6,
+      "events": 18,
+      "levels": 1,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92
+      ],
+      "scopes_source": 14,
+      "scopes_target": 18,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 84352,
+          "min_delta": -60,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 63,
+          "terms": 23,
+          "iid_histogram": {
+            "1": 72,
+            "2": -44,
+            "3": -8,
+            "4": -36,
+            "5": 4
+          },
+          "frontier_width": 16,
+          "open_count_blocks": 0,
+          "total_states": 44,
+          "peak_states": 16,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.008073136000000036,
+      "wall_seconds": 0.005290797999805363
+    },
+    {
+      "case": "random-85",
+      "guards": 7,
+      "events": 17,
+      "levels": 1,
+      "legal_masks": 35,
+      "enumerated_masks": 35,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        248
+      ],
+      "scopes_source": 14,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 291280,
+          "min_delta": 52,
+          "max_delta": 124,
+          "positive_masks": 35,
+          "negative_masks": 0,
+          "terms": 28,
+          "iid_histogram": {
+            "1": 164,
+            "2": 8,
+            "3": 32,
+            "4": -48,
+            "5": 32,
+            "6": -16
+          },
+          "frontier_width": 18,
+          "open_count_blocks": 1,
+          "total_states": 74,
+          "peak_states": 24,
+          "attaining_mask": 42
+        }
+      ],
+      "cpu_seconds": 0.0038144900000000037,
+      "wall_seconds": 0.005888646000130393
+    },
+    {
+      "case": "random-86",
+      "guards": 8,
+      "events": 19,
+      "levels": 2,
+      "legal_masks": 256,
+      "enumerated_masks": 256,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92,
+        144
+      ],
+      "scopes_source": 9,
+      "scopes_target": 16,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 9,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 1159552,
+          "min_delta": 12,
+          "max_delta": 92,
+          "positive_masks": 256,
+          "negative_masks": 0,
+          "terms": 17,
+          "iid_histogram": {
+            "1": -56,
+            "2": 52,
+            "3": -16,
+            "4": 56
+          },
+          "frontier_width": 7,
+          "open_count_blocks": 0,
+          "total_states": 52,
+          "peak_states": 14,
+          "attaining_mask": 42
+        }
+      ],
+      "cpu_seconds": 0.01599869300000001,
+      "wall_seconds": 0.012421019000612432
+    },
+    {
+      "case": "random-87",
+      "guards": 9,
+      "events": 16,
+      "levels": 1,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        116
+      ],
+      "scopes_source": 19,
+      "scopes_target": 13,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 4350464,
+          "min_delta": -124,
+          "max_delta": -16,
+          "positive_masks": 0,
+          "negative_masks": 512,
+          "terms": 14,
+          "iid_histogram": {
+            "1": 32,
+            "2": -60,
+            "3": -28
+          },
+          "frontier_width": 5,
+          "open_count_blocks": 0,
+          "total_states": 53,
+          "peak_states": 16,
+          "attaining_mask": 224
+        }
+      ],
+      "cpu_seconds": 0.012001464000000017,
+      "wall_seconds": 0.014130087000012281
+    },
+    {
+      "case": "random-88",
+      "guards": 2,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 2,
+      "enumerated_masks": 2,
+      "resident_numeric_masks": 2,
+      "capacity": [
+        60
+      ],
+      "scopes_source": 4,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 1152,
+          "min_delta": 24,
+          "max_delta": 24,
+          "positive_masks": 2,
+          "negative_masks": 0,
+          "terms": 3,
+          "iid_histogram": {
+            "1": 16,
+            "2": 8
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 4,
+          "peak_states": 2,
+          "attaining_mask": 1
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0007308980002562748
+    },
+    {
+      "case": "random-89",
+      "guards": 3,
+      "events": 4,
+      "levels": 2,
+      "legal_masks": 8,
+      "enumerated_masks": 8,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        64,
+        60
+      ],
+      "scopes_source": 8,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 4,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 5344,
+          "min_delta": -48,
+          "max_delta": 8,
+          "positive_masks": 1,
+          "negative_masks": 6,
+          "terms": 6,
+          "iid_histogram": {
+            "1": -56,
+            "2": -16,
+            "3": 24
+          },
+          "frontier_width": 3,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 4,
+          "attaining_mask": 1
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0019162690005032346
+    },
+    {
+      "case": "random-90",
+      "guards": 4,
+      "events": 9,
+      "levels": 1,
+      "legal_masks": 6,
+      "enumerated_masks": 6,
+      "resident_numeric_masks": 6,
+      "capacity": [
+        32
+      ],
+      "scopes_source": 12,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 2144,
+          "min_delta": -24,
+          "max_delta": -16,
+          "positive_masks": 0,
+          "negative_masks": 6,
+          "terms": 3,
+          "iid_histogram": {
+            "1": 4,
+            "2": 4,
+            "3": -12
+          },
+          "frontier_width": 2,
+          "open_count_blocks": 1,
+          "total_states": 13,
+          "peak_states": 5,
+          "attaining_mask": 5
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.001718311000331596
+    },
+    {
+      "case": "random-91",
+      "guards": 5,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 10,
+      "enumerated_masks": 10,
+      "resident_numeric_masks": 10,
+      "capacity": [
+        44
+      ],
+      "scopes_source": 4,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 7520,
+          "min_delta": 16,
+          "max_delta": 40,
+          "positive_masks": 10,
+          "negative_masks": 0,
+          "terms": 9,
+          "iid_histogram": {
+            "1": 68,
+            "2": 8,
+            "3": -16,
+            "4": 8
+          },
+          "frontier_width": 4,
+          "open_count_blocks": 1,
+          "total_states": 18,
+          "peak_states": 7,
+          "attaining_mask": 12
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0018550169997979538
+    },
+    {
+      "case": "random-92",
+      "guards": 6,
+      "events": 13,
+      "levels": 2,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        76,
+        172
+      ],
+      "scopes_source": 14,
+      "scopes_target": 15,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 7,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 111680,
+          "min_delta": -104,
+          "max_delta": 12,
+          "positive_masks": 5,
+          "negative_masks": 56,
+          "terms": 20,
+          "iid_histogram": {
+            "1": -160,
+            "3": 60,
+            "4": 8,
+            "5": -12
+          },
+          "frontier_width": 11,
+          "open_count_blocks": 0,
+          "total_states": 44,
+          "peak_states": 18,
+          "attaining_mask": 32
+        }
+      ],
+      "cpu_seconds": 0.00803534100000003,
+      "wall_seconds": 0.007026475000202481
+    },
+    {
+      "case": "random-93",
+      "guards": 7,
+      "events": 8,
+      "levels": 1,
+      "legal_masks": 128,
+      "enumerated_masks": 128,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        60
+      ],
+      "scopes_source": 10,
+      "scopes_target": 10,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 26368,
+          "min_delta": -32,
+          "max_delta": 8,
+          "positive_masks": 7,
+          "negative_masks": 108,
+          "terms": 16,
+          "iid_histogram": {
+            "1": 16,
+            "2": 16,
+            "3": -36
+          },
+          "frontier_width": 8,
+          "open_count_blocks": 0,
+          "total_states": 62,
+          "peak_states": 18,
+          "attaining_mask": 49
+        }
+      ],
+      "cpu_seconds": 0.003963638999999963,
+      "wall_seconds": 0.005402916000093683
+    },
+    {
+      "case": "random-94",
+      "guards": 8,
+      "events": 15,
+      "levels": 1,
+      "legal_masks": 70,
+      "enumerated_masks": 70,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        280
+      ],
+      "scopes_source": 10,
+      "scopes_target": 14,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 2632400,
+          "min_delta": 132,
+          "max_delta": 260,
+          "positive_masks": 70,
+          "negative_masks": 0,
+          "terms": 30,
+          "iid_histogram": {
+            "1": 244,
+            "2": 156,
+            "3": -100
+          },
+          "frontier_width": 19,
+          "open_count_blocks": 1,
+          "total_states": 165,
+          "peak_states": 55,
+          "attaining_mask": 240
+        }
+      ],
+      "cpu_seconds": 0.01199975200000003,
+      "wall_seconds": 0.009260342000743549
+    },
+    {
+      "case": "random-95",
+      "guards": 9,
+      "events": 10,
+      "levels": 2,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        112,
+        156
+      ],
+      "scopes_source": 13,
+      "scopes_target": 11,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 10,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 1283328,
+          "min_delta": -120,
+          "max_delta": 32,
+          "positive_masks": 43,
+          "negative_masks": 452,
+          "terms": 29,
+          "iid_histogram": {
+            "1": -156,
+            "2": -12,
+            "3": -32,
+            "4": 80
+          },
+          "frontier_width": 16,
+          "open_count_blocks": 0,
+          "total_states": 143,
+          "peak_states": 33,
+          "attaining_mask": 132
+        }
+      ],
+      "cpu_seconds": 0.016000015000000034,
+      "wall_seconds": 0.016096962000119674
+    },
+    {
+      "case": "random-96",
+      "guards": 2,
+      "events": 5,
+      "levels": 1,
+      "legal_masks": 4,
+      "enumerated_masks": 4,
+      "resident_numeric_masks": 4,
+      "capacity": [
+        20
+      ],
+      "scopes_source": 6,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 160,
+          "min_delta": -8,
+          "max_delta": -4,
+          "positive_masks": 0,
+          "negative_masks": 4,
+          "terms": 1,
+          "iid_histogram": {
+            "1": 4
+          },
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 3,
+          "peak_states": 1,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0008287749997180072
+    },
+    {
+      "case": "random-97",
+      "guards": 3,
+      "events": 4,
+      "levels": 1,
+      "legal_masks": 3,
+      "enumerated_masks": 3,
+      "resident_numeric_masks": 3,
+      "capacity": [
+        40
+      ],
+      "scopes_source": 2,
+      "scopes_target": 4,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 272,
+          "min_delta": 8,
+          "max_delta": 12,
+          "positive_masks": 3,
+          "negative_masks": 0,
+          "terms": 4,
+          "iid_histogram": {
+            "1": 20,
+            "2": 4
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 7,
+          "peak_states": 3,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0005777779997515609
+    },
+    {
+      "case": "random-98",
+      "guards": 4,
+      "events": 9,
+      "levels": 2,
+      "legal_masks": 16,
+      "enumerated_masks": 16,
+      "resident_numeric_masks": 16,
+      "capacity": [
+        60,
+        48
+      ],
+      "scopes_source": 11,
+      "scopes_target": 13,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 5,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 45248,
+          "min_delta": -92,
+          "max_delta": -4,
+          "positive_masks": 0,
+          "negative_masks": 16,
+          "terms": 10,
+          "iid_histogram": {
+            "1": -88,
+            "2": -16,
+            "3": 28,
+            "4": -8
+          },
+          "frontier_width": 6,
+          "open_count_blocks": 0,
+          "total_states": 14,
+          "peak_states": 6,
+          "attaining_mask": 4
+        }
+      ],
+      "cpu_seconds": 0.007999988000000013,
+      "wall_seconds": 0.005468013999234245
+    },
+    {
+      "case": "random-99",
+      "guards": 5,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 32,
+      "enumerated_masks": 32,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        36
+      ],
+      "scopes_source": 6,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 2464,
+          "min_delta": -20,
+          "max_delta": 8,
+          "positive_masks": 6,
+          "negative_masks": 22,
+          "terms": 9,
+          "iid_histogram": {
+            "1": 20,
+            "2": -4,
+            "3": 4,
+            "4": -4
+          },
+          "frontier_width": 5,
+          "open_count_blocks": 0,
+          "total_states": 18,
+          "peak_states": 6,
+          "attaining_mask": 14
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0018327629995837924
+    },
+    {
+      "case": "random-100",
+      "guards": 6,
+      "events": 10,
+      "levels": 1,
+      "legal_masks": 20,
+      "enumerated_masks": 20,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        124
+      ],
+      "scopes_source": 10,
+      "scopes_target": 11,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 57936,
+          "min_delta": 28,
+          "max_delta": 72,
+          "positive_masks": 20,
+          "negative_masks": 0,
+          "terms": 20,
+          "iid_histogram": {
+            "1": 80,
+            "2": 20,
+            "3": -12,
+            "4": -12,
+            "5": 20
+          },
+          "frontier_width": 12,
+          "open_count_blocks": 1,
+          "total_states": 42,
+          "peak_states": 14,
+          "attaining_mask": 49
+        }
+      ],
+      "cpu_seconds": 0.004057938999999955,
+      "wall_seconds": 0.003592867999941518
+    },
+    {
+      "case": "random-101",
+      "guards": 7,
+      "events": 10,
+      "levels": 2,
+      "legal_masks": 128,
+      "enumerated_masks": 128,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        96,
+        88
+      ],
+      "scopes_source": 8,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 55744,
+          "min_delta": -52,
+          "max_delta": 28,
+          "positive_masks": 15,
+          "negative_masks": 102,
+          "terms": 19,
+          "iid_histogram": {
+            "1": -96,
+            "2": 40,
+            "3": -12,
+            "4": 40,
+            "7": -24
+          },
+          "frontier_width": 9,
+          "open_count_blocks": 0,
+          "total_states": 55,
+          "peak_states": 18,
+          "attaining_mask": 82
+        }
+      ],
+      "cpu_seconds": 0.007939719000000012,
+      "wall_seconds": 0.006609328999729769
+    },
+    {
+      "case": "random-102",
+      "guards": 8,
+      "events": 9,
+      "levels": 1,
+      "legal_masks": 36,
+      "enumerated_masks": 36,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        60
+      ],
+      "scopes_source": 11,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 15280,
+          "min_delta": -32,
+          "max_delta": 4,
+          "positive_masks": 2,
+          "negative_masks": 33,
+          "terms": 19,
+          "iid_histogram": {
+            "1": 32,
+            "2": -12,
+            "3": -20,
+            "4": -8
+          },
+          "frontier_width": 9,
+          "open_count_blocks": 1,
+          "total_states": 46,
+          "peak_states": 12,
+          "attaining_mask": 86
+        }
+      ],
+      "cpu_seconds": 0.003888978999999959,
+      "wall_seconds": 0.00386031899961381
+    },
+    {
+      "case": "random-103",
+      "guards": 9,
+      "events": 24,
+      "levels": 1,
+      "legal_masks": 126,
+      "enumerated_masks": 126,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        188
+      ],
+      "scopes_source": 19,
+      "scopes_target": 14,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 260768,
+          "min_delta": 24,
+          "max_delta": 72,
+          "positive_masks": 126,
+          "negative_masks": 0,
+          "terms": 30,
+          "iid_histogram": {
+            "1": 56,
+            "2": 20,
+            "5": -8,
+            "3": -8,
+            "6": 24,
+            "7": -16,
+            "4": 4,
+            "8": 16,
+            "9": -8
+          },
+          "frontier_width": 19,
+          "open_count_blocks": 1,
+          "total_states": 186,
+          "peak_states": 49,
+          "attaining_mask": 46
+        }
+      ],
+      "cpu_seconds": 0.012000663000000023,
+      "wall_seconds": 0.01148521399954916
+    },
+    {
+      "case": "random-104",
+      "guards": 2,
+      "events": 6,
+      "levels": 2,
+      "legal_masks": 4,
+      "enumerated_masks": 4,
+      "resident_numeric_masks": 4,
+      "capacity": [
+        44,
+        36
+      ],
+      "scopes_source": 10,
+      "scopes_target": 6,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 3,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 8240,
+          "min_delta": -68,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 3,
+          "terms": 3,
+          "iid_histogram": {
+            "1": -72,
+            "2": 4
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 0,
+          "total_states": 4,
+          "peak_states": 2,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0014023860003362643
+    },
+    {
+      "case": "random-105",
+      "guards": 3,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 8,
+      "enumerated_masks": 8,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        44
+      ],
+      "scopes_source": 4,
+      "scopes_target": 7,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 1536,
+          "min_delta": -8,
+          "max_delta": 24,
+          "positive_masks": 7,
+          "negative_masks": 1,
+          "terms": 4,
+          "iid_histogram": {
+            "1": 24,
+            "2": 8
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 0,
+          "total_states": 5,
+          "peak_states": 2,
+          "attaining_mask": 7
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0015169889993558172
+    },
+    {
+      "case": "random-106",
+      "guards": 4,
+      "events": 12,
+      "levels": 1,
+      "legal_masks": 6,
+      "enumerated_masks": 6,
+      "resident_numeric_masks": 6,
+      "capacity": [
+        116
+      ],
+      "scopes_source": 13,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 7152,
+          "min_delta": 28,
+          "max_delta": 44,
+          "positive_masks": 6,
+          "negative_masks": 0,
+          "terms": 9,
+          "iid_histogram": {
+            "1": 72,
+            "2": -12
+          },
+          "frontier_width": 5,
+          "open_count_blocks": 1,
+          "total_states": 13,
+          "peak_states": 5,
+          "attaining_mask": 3
+        }
+      ],
+      "cpu_seconds": 0.003999372000000001,
+      "wall_seconds": 0.0022575920002054772
+    },
+    {
+      "case": "random-107",
+      "guards": 5,
+      "events": 11,
+      "levels": 2,
+      "legal_masks": 32,
+      "enumerated_masks": 32,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        80,
+        92
+      ],
+      "scopes_source": 8,
+      "scopes_target": 11,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 6,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 10368,
+          "min_delta": -28,
+          "max_delta": 12,
+          "positive_masks": 4,
+          "negative_masks": 27,
+          "terms": 9,
+          "iid_histogram": {
+            "1": -28,
+            "2": -4,
+            "3": 12
+          },
+          "frontier_width": 3,
+          "open_count_blocks": 0,
+          "total_states": 19,
+          "peak_states": 6,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.004001246000000069,
+      "wall_seconds": 0.003389272000276833
+    },
+    {
+      "case": "random-108",
+      "guards": 6,
+      "events": 17,
+      "levels": 1,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        72
+      ],
+      "scopes_source": 13,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 155216,
+          "min_delta": -68,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 63,
+          "terms": 15,
+          "iid_histogram": {
+            "1": 44,
+            "2": -44,
+            "3": -36,
+            "5": 4,
+            "6": -4
+          },
+          "frontier_width": 8,
+          "open_count_blocks": 0,
+          "total_states": 28,
+          "peak_states": 8,
+          "attaining_mask": 4
+        }
+      ],
+      "cpu_seconds": 0.00400060499999999,
+      "wall_seconds": 0.0043260580005153315
+    },
+    {
+      "case": "random-109",
+      "guards": 7,
+      "events": 14,
+      "levels": 1,
+      "legal_masks": 35,
+      "enumerated_masks": 35,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        184
+      ],
+      "scopes_source": 8,
+      "scopes_target": 5,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 100080,
+          "min_delta": 32,
+          "max_delta": 76,
+          "positive_masks": 35,
+          "negative_masks": 0,
+          "terms": 17,
+          "iid_histogram": {
+            "1": 64,
+            "3": -24,
+            "4": 44,
+            "6": -8
+          },
+          "frontier_width": 10,
+          "open_count_blocks": 1,
+          "total_states": 42,
+          "peak_states": 13,
+          "attaining_mask": 28
+        }
+      ],
+      "cpu_seconds": 0.003998180999999934,
+      "wall_seconds": 0.00390243299989379
+    },
+    {
+      "case": "random-110",
+      "guards": 8,
+      "events": 19,
+      "levels": 2,
+      "legal_masks": 256,
+      "enumerated_masks": 256,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        92,
+        284
+      ],
+      "scopes_source": 26,
+      "scopes_target": 22,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 9,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 3534208,
+          "min_delta": -244,
+          "max_delta": 8,
+          "positive_masks": 2,
+          "negative_masks": 254,
+          "terms": 29,
+          "iid_histogram": {
+            "1": -280,
+            "2": -28,
+            "3": 56,
+            "4": 16
+          },
+          "frontier_width": 19,
+          "open_count_blocks": 0,
+          "total_states": 176,
+          "peak_states": 75,
+          "attaining_mask": 4
+        }
+      ],
+      "cpu_seconds": 0.015998283000000058,
+      "wall_seconds": 0.015969619999850693
+    },
+    {
+      "case": "random-111",
+      "guards": 9,
+      "events": 22,
+      "levels": 1,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        136
+      ],
+      "scopes_source": 25,
+      "scopes_target": 25,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 1384960,
+          "min_delta": -100,
+          "max_delta": 4,
+          "positive_masks": 1,
+          "negative_masks": 509,
+          "terms": 38,
+          "iid_histogram": {
+            "1": 64,
+            "2": -32,
+            "3": -56
+          },
+          "frontier_width": 24,
+          "open_count_blocks": 0,
+          "total_states": 140,
+          "peak_states": 48,
+          "attaining_mask": 274
+        }
+      ],
+      "cpu_seconds": 0.023999651999999982,
+      "wall_seconds": 0.021955122000690608
+    },
+    {
+      "case": "random-112",
+      "guards": 2,
+      "events": 6,
+      "levels": 1,
+      "legal_masks": 2,
+      "enumerated_masks": 2,
+      "resident_numeric_masks": 2,
+      "capacity": [
+        68
+      ],
+      "scopes_source": 2,
+      "scopes_target": 3,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 1600,
+          "min_delta": 24,
+          "max_delta": 32,
+          "positive_masks": 2,
+          "negative_masks": 0,
+          "terms": 3,
+          "iid_histogram": {
+            "1": 16,
+            "2": 8
+          },
+          "frontier_width": 1,
+          "open_count_blocks": 1,
+          "total_states": 4,
+          "peak_states": 2,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0005533109997486463
+    },
+    {
+      "case": "random-113",
+      "guards": 3,
+      "events": 5,
+      "levels": 2,
+      "legal_masks": 8,
+      "enumerated_masks": 8,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        64,
+        72
+      ],
+      "scopes_source": 8,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 4,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 8784,
+          "min_delta": -52,
+          "max_delta": 4,
+          "positive_masks": 1,
+          "negative_masks": 6,
+          "terms": 6,
+          "iid_histogram": {
+            "1": -44,
+            "2": -12,
+            "3": 4
+          },
+          "frontier_width": 3,
+          "open_count_blocks": 0,
+          "total_states": 8,
+          "peak_states": 4,
+          "attaining_mask": 2
+        }
+      ],
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.0020930139999109088
+    },
+    {
+      "case": "random-114",
+      "guards": 4,
+      "events": 9,
+      "levels": 1,
+      "legal_masks": 6,
+      "enumerated_masks": 6,
+      "resident_numeric_masks": 6,
+      "capacity": [
+        40
+      ],
+      "scopes_source": 6,
+      "scopes_target": 5,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 2592,
+          "min_delta": -24,
+          "max_delta": -8,
+          "positive_masks": 0,
+          "negative_masks": 6,
+          "terms": 5,
+          "iid_histogram": {
+            "1": 12,
+            "2": -12,
+            "4": -16
+          },
+          "frontier_width": 2,
+          "open_count_blocks": 1,
+          "total_states": 12,
+          "peak_states": 4,
+          "attaining_mask": 6
+        }
+      ],
+      "cpu_seconds": 0.004003078999999965,
+      "wall_seconds": 0.0014108289997238899
+    },
+    {
+      "case": "random-115",
+      "guards": 5,
+      "events": 13,
+      "levels": 1,
+      "legal_masks": 10,
+      "enumerated_masks": 10,
+      "resident_numeric_masks": 10,
+      "capacity": [
+        184
+      ],
+      "scopes_source": 16,
+      "scopes_target": 9,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 30992,
+          "min_delta": 24,
+          "max_delta": 68,
+          "positive_masks": 10,
+          "negative_masks": 0,
+          "terms": 12,
+          "iid_histogram": {
+            "1": 64,
+            "2": -8,
+            "3": 20
+          },
+          "frontier_width": 8,
+          "open_count_blocks": 1,
+          "total_states": 25,
+          "peak_states": 10,
+          "attaining_mask": 17
+        }
+      ],
+      "cpu_seconds": 0.003997649999999964,
+      "wall_seconds": 0.003422652000153903
+    },
+    {
+      "case": "random-116",
+      "guards": 6,
+      "events": 9,
+      "levels": 2,
+      "legal_masks": 64,
+      "enumerated_masks": 64,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        76,
+        84
+      ],
+      "scopes_source": 10,
+      "scopes_target": 12,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 7,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 24448,
+          "min_delta": -52,
+          "max_delta": 28,
+          "positive_masks": 19,
+          "negative_masks": 40,
+          "terms": 8,
+          "iid_histogram": {
+            "1": -96,
+            "2": 8,
+            "3": 20
+          },
+          "frontier_width": 2,
+          "open_count_blocks": 0,
+          "total_states": 12,
+          "peak_states": 3,
+          "attaining_mask": 32
+        }
+      ],
+      "cpu_seconds": 0.003999333000000105,
+      "wall_seconds": 0.0039090120008040685
+    },
+    {
+      "case": "random-117",
+      "guards": 7,
+      "events": 19,
+      "levels": 1,
+      "legal_masks": 128,
+      "enumerated_masks": 128,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        104
+      ],
+      "scopes_source": 16,
+      "scopes_target": 21,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 127584,
+          "min_delta": -76,
+          "max_delta": 24,
+          "positive_masks": 17,
+          "negative_masks": 104,
+          "terms": 21,
+          "iid_histogram": {
+            "1": 92,
+            "2": 8,
+            "4": -16
+          },
+          "frontier_width": 12,
+          "open_count_blocks": 0,
+          "total_states": 74,
+          "peak_states": 24,
+          "attaining_mask": 93
+        }
+      ],
+      "cpu_seconds": 0.008030071999999944,
+      "wall_seconds": 0.0074881789996652515
+    },
+    {
+      "case": "random-118",
+      "guards": 8,
+      "events": 9,
+      "levels": 1,
+      "legal_masks": 70,
+      "enumerated_masks": 70,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        108
+      ],
+      "scopes_source": 7,
+      "scopes_target": 11,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 374720,
+          "min_delta": 32,
+          "max_delta": 104,
+          "positive_masks": 70,
+          "negative_masks": 0,
+          "terms": 23,
+          "iid_histogram": {
+            "1": 72,
+            "2": 92,
+            "3": -40,
+            "4": 20,
+            "6": -20
+          },
+          "frontier_width": 14,
+          "open_count_blocks": 1,
+          "total_states": 84,
+          "peak_states": 25,
+          "attaining_mask": 77
+        }
+      ],
+      "cpu_seconds": 0.0039697090000000435,
+      "wall_seconds": 0.004928193000523606
+    },
+    {
+      "case": "random-119",
+      "guards": 9,
+      "events": 22,
+      "levels": 2,
+      "legal_masks": 512,
+      "enumerated_masks": 512,
+      "resident_numeric_masks": 8,
+      "capacity": [
+        112,
+        408
+      ],
+      "scopes_source": 16,
+      "scopes_target": 10,
+      "result": "passed",
+      "level_results": [
+        {
+          "level": 0,
+          "square_sum": 0,
+          "min_delta": 0,
+          "max_delta": 0,
+          "positive_masks": 0,
+          "negative_masks": 0,
+          "terms": 0,
+          "iid_histogram": {},
+          "frontier_width": 0,
+          "open_count_blocks": 0,
+          "total_states": 10,
+          "peak_states": 1,
+          "attaining_mask": 0
+        },
+        {
+          "level": 1,
+          "square_sum": 23390592,
+          "min_delta": -400,
+          "max_delta": 8,
+          "positive_masks": 1,
+          "negative_masks": 511,
+          "terms": 29,
+          "iid_histogram": {
+            "1": -376,
+            "2": -24,
+            "3": -88,
+            "4": 100,
+            "5": -20
+          },
+          "frontier_width": 19,
+          "open_count_blocks": 0,
+          "total_states": 200,
+          "peak_states": 65,
+          "attaining_mask": 0
+        }
+      ],
+      "cpu_seconds": 0.02787591299999992,
+      "wall_seconds": 0.027125568999508687
+    }
+  ]
+}
