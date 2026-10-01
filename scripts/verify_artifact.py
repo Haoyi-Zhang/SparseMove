@@ -189,7 +189,7 @@ def audit_ledgers() -> None:
             "claim ledger must contain 17 unique material claims")
     require({row["claim_id"] for row in claims} == {f"C{index}" for index in range(1, 18)},
             "claim ledger identifiers are incomplete")
-    require(all(row["fresh_recheck"] == "2026-09-21" for row in claims),
+    require(all(row["fresh_recheck"] == "2026-09-25" for row in claims),
             "claim ledger recheck dates are stale")
     require(all(all(row[field].strip() for field in row) for row in claims),
             "claim ledger contains a blank field")
@@ -213,6 +213,7 @@ def audit_python_sources() -> None:
         if relative.parts[0] in {"src", "scripts"}:
             require(not any(isinstance(node, ast.Assert) for node in ast.walk(tree)),
                     f"optimization-sensitive assert statement in executable source: {relative}")
+        production_imports = []
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 modules = [alias.name.split(".", 1)[0] for alias in node.names]
@@ -225,9 +226,14 @@ def audit_python_sources() -> None:
                         f"non-standard dependency {module!r} in {relative}")
                 require(module not in forbidden_modules,
                         f"network/model/third-party import {module!r} in {relative}")
+                if module in local_roots:
+                    production_imports.append(module)
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
                 require(node.func.id not in forbidden_calls,
                         f"dynamic execution call {node.func.id!r} in {relative}")
+        if relative == Path("scripts/standalone_oracle.py"):
+            require(not production_imports,
+                    "standalone oracle imports the production dataflow package")
     test_tree = ast.parse((ROOT / "tests" / "test_contract.py").read_text(encoding="utf-8"))
     test_methods = sum(
         isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_")
@@ -297,6 +303,16 @@ def audit_validation_results() -> None:
 
     standalone = scientific(load_json(RESULTS / "standalone-oracle.json"))
     require(standalone == {
+        "admission_mutation_names": [
+            "payload-capacity-48-to-47",
+            "control-capacity-9-to-8",
+            "event-order-permutation",
+            "parent-relation",
+            "guard-operand",
+            "binding-operand",
+            "strict-integer-type",
+        ],
+        "admission_mutations_rejected": 7,
         "campaign_levels": 1817,
         "campaign_masks": 256074,
         "campaign_pairs": 1730,
@@ -306,6 +322,8 @@ def audit_validation_results() -> None:
         "reduction_pairs": 218,
         "resident_codec_masks": 13997,
         "status": "passed",
+        "structured_source_peak_payload": [48],
+        "structured_target_peak_payload": [48],
         "swap_events": 0,
         "zero_bound_false": 192,
         "zero_bound_true": 26,

@@ -219,14 +219,17 @@ not a new generic solver. Common footprint cancellation may reduce this paramete
 ## 5. Constant-payload hardness
 
 **Theorem 8.** For the unbounded finite IR family, deciding whether all legal masks
-satisfy C_target-C_source<=0 is coNP-complete, even with one hierarchy edge, an
-eight-byte payload capacity, dense four-byte scalar tiles, and disjoint 2:4 support
-blocks. The global control memory and program description are not bounded by eight
-bytes. The requested movement threshold is the fixed constant zero.
+satisfy C_target-C_source<=0 is coNP-complete. Its complementary problem, deciding
+whether there exists a legal mask with C_target-C_source>0, is NP-complete. Both
+statements hold with one hierarchy edge, an eight-byte payload capacity, dense
+four-byte scalar tiles, and disjoint 2:4 support blocks. The global control memory and
+program description are not bounded by eight bytes. The requested movement threshold
+is the fixed constant zero.
 
-*Proof.* Non-universality has a polynomial witness: a mask of n bits. Check the
-cardinality blocks and evaluate the literal event/residency cost in polynomial time,
-then test whether it is positive. Thus the problem is in coNP.
+*Proof.* The existential complement has a polynomial witness: a mask of n bits. Check
+the cardinality blocks and evaluate the literal event/residency cost in polynomial
+time, then test whether it is positive. Thus the complement is in NP and the universal
+problem is in coNP.
 
 For hardness reduce the complement of the standard unweighted Simple Max Cut
 decision problem. An instance is a graph G=(V,E) and an integer L with
@@ -255,7 +258,8 @@ residency, so both mappings retain the same eight-byte payload capacity. Therefo
     f(S) = 4 (|cut(S)| - (L-1)).
 
 The fixed request f(S)<=0 holds for every support exactly when G has no cut of size
-at least L. The number of offset units is at most |E|-1, so the construction is
+at least L. Equivalently, some support has f(S)>0 exactly when G has a cut of size at
+least L. The number of offset units is at most |E|-1, so the construction is
 polynomial.
 
 For the 2:4 restriction, replace every vertex guard by a block consisting of that
@@ -267,7 +271,8 @@ single-event/single-residency computations for the dummy guards, and for isolate
 vertex guards when needed. The offset events are unconditional and need no lifting.
 All neutral traffic cancels, and serial execution keeps the eight-byte payload
 capacity. Consequently the fixed-zero decision is unchanged under 2:4. The
-reduction is polynomial, proving coNP-hardness. QED.
+reduction is polynomial, proving NP-hardness of the existential complement and
+coNP-hardness of the universal decision. QED.
 
 This theorem concerns an arbitrary-sized finite family, not the literal finite
 admission caps of one implementation. A polynomial-size upper certificate for all
@@ -278,6 +283,17 @@ nontrivial threshold: 218 generated pairs and 5,800 legal masks agree between th
 literal traffic interpreter, the extracted signature and the closed-form reduction.
 Those finite checks validate the implementation of the gadgets; they are not the
 general hardness proof.
+
+The local rewrite reachability also has two distinct parts. In `cut_graph`, each
+edge gadget is obtained from its source by one adjacent event interchange retaining
+the B binding by execution slot. A thresholded `cut_threshold` instance additionally
+needs one merge for each offset unit, because the source has two one-event B
+residencies while the target has one two-event residency. The retained small trace
+uses edges {(0,1),(1,2)} and L=2: interchanges at positions 1 and 5 followed by a merge
+of scopes 14 and 15. The scope counts are 16,16,16,15, every intermediate mapping is
+re-admitted with an eight-byte payload peak, and the final mapping equals the generated
+target exactly. The interchange-only graph experiment and the complete threshold
+reduction are therefore not conflated.
 
 ## 6. Separating examples and rewrite rules
 
@@ -387,16 +403,23 @@ The executable evidence uses four distinct levels that must not be conflated.
    but imports production modules. It is a production-coupled cross-check, not an
    independent implementation.
 4. `scripts/standalone_oracle.py` intentionally does not import the production
-   `dataflow` package. It has its own parser, admission checks, legal-mask enumerator,
+   `dataflow` package. It has its own strict parser and admission path for exact fields
+   and integer types, event permutations, support/operand compatibility, parent and
+   lifetime containment, leaf bindings, and payload/control capacities. Before the
+   campaign it admits the valid structured example and rejects seven focused
+   mutations, including payload 48->47, control 9->8, event-order, parent, guard,
+   binding, and Boolean-identifier faults. It then uses its own legal-mask enumerator,
    load-once interpreter, signed-OR construction, exact-square computation, packet
    codecs, modular executor, and reduction reconstruction. On the retained input it
-   checks all 1,730 pairs and 256,074 masks, 13,997 packet executions, and all 218
-   reduction pairs / 5,800 masks.
+   admits and checks all 1,730 pairs and 256,074 masks, 13,997 packet executions, and
+   all 218 reduction pairs / 5,800 masks.
 
 The standalone oracle lowers the chance that one production function explains all
-finite agreements. It remains project-authored, follows the same prose contract, and
-runs in the same language and host environment. It is not external replication,
-proof-assistant mechanization, or evidence that the prose contract matches a device.
+finite agreements. It remains project-authored and shares the same prose contract,
+frozen JSON corpus, Python language semantics, and host environment. Those are common
+trust boundaries rather than independently validated facts. The oracle is not external
+replication, proof-assistant mechanization, or evidence that the prose contract matches
+a device.
 
 `scripts/reviewer_stress.py` provides a different defense against generator coupling.
 It does not call the frozen generator and creates 144 post-freeze pairs with fresh

@@ -227,6 +227,25 @@ class Contract(unittest.TestCase):
         p2=G.pair(k,p['source'],q,[8]);c,t=difference(p2)
         for x in masks(k):self.assertEqual(eval_difference(c,t,x),4*sum(((x>>u)^(x>>v))&1 for u,v in edges))
 
+        # The thresholded reduction adds an offset unit.  Edge gadgets are
+        # reached by interchanges; the offset target additionally merges its
+        # two adjacent B residencies.  Check the complete local trace rather
+        # than conflating it with the cut_graph-only interchange experiment.
+        threshold=G.cut_threshold(3,[(0,1),(1,2)],2);k=threshold['kernel'];a=threshold['architecture']
+        trace=[
+            {'rule':'interchange','position':1,'slot_operands':[1]},
+            {'rule':'interchange','position':5,'slot_operands':[1]},
+            {'rule':'merge','left':14,'right':15},
+        ]
+        q=threshold['source'];scope_counts=[len(q['scopes'])];peak_payload=[]
+        for step in trace:
+            q=apply_trace(k,a,q,[step]);scope_counts.append(len(q['scopes']))
+            admitted=validate_pair({'kernel':k,'architecture':a,'source':threshold['source'],'target':q})
+            peak_payload.append(admitted['target']['peak_payload_bytes'][0])
+        self.assertEqual(scope_counts,[16,16,16,15])
+        self.assertEqual(peak_payload,[8,8,8])
+        self.assertEqual(q,threshold['target'])
+
     def test_fixed_zero_maxcut_reduction(self):
         # Exhaust every simple graph through four vertices and every nontrivial
         # Max-Cut threshold.  The literal traffic delta must be
@@ -263,6 +282,8 @@ class Contract(unittest.TestCase):
         checked=check_upper(pair,certificate,0,0)
         self.assertTrue(checked['accepted']);self.assertTrue(checked['exact'])
         self.assertEqual(certificate['statistics']['total_states'],9)
+        with self.assertRaises(AnalysisLimit):check_upper(pair,certificate,0,0,max_layer=1)
+        self.assertTrue(check_upper(pair,certificate,0,0,max_layer=3)['accepted'])
 
     def test_signed_64bit_certificate_boundary(self):
         pair=G.grid(2);certificate=prove_upper(pair);bound=certificate['bound']
@@ -319,6 +340,17 @@ class Contract(unittest.TestCase):
             self.assertEqual(set(trace),{'source','target'})
             rejected=run('check-upper',pair,'--certificate',upper_path,expected=1)
             self.assertEqual(rejected['status'],'rejected')
+
+            shipped=ROOT/'examples'/'structured-zero-bound-certificate.json'
+            limited=run('check-upper',pair,'--certificate',shipped,'--bound',0,'--max-layer',1,expected=2)
+            self.assertEqual(limited['status'],'unresolved')
+            self.assertIn('layer state limit',limited['reason'])
+            accepted=run('check-upper',pair,'--certificate',shipped,'--bound',0,'--max-layer',3)
+            self.assertTrue(accepted['accepted'])
+            damaged=json.loads(shipped.read_text());damaged['layers'][0][0][2]=1
+            damaged_path=directory/'damaged-upper.json';damaged_path.write_text(json.dumps(damaged))
+            invalid=run('check-upper',pair,'--certificate',damaged_path,'--bound',0,'--max-layer',3,expected=1)
+            self.assertEqual(invalid['status'],'rejected')
 
     def test_json_duplicate_and_publication(self):
         with tempfile.TemporaryDirectory() as d:

@@ -43,7 +43,8 @@ def check_upper(pair:dict,certificate:dict,level:int,bound:int,
     if type(layers) is not list or len(layers)!=n+1:raise Invalid('layer count')
     tables=[];total=0
     for t,rows in enumerate(layers):
-        if type(rows) is not list or not rows or len(rows)>max_layer:raise Invalid('layer size')
+        if type(rows) is not list or not rows:raise Invalid('layer structure')
+        if len(rows)>max_layer:raise AnalysisLimit('verifier layer state limit')
         table={};total+=len(rows)
         if total>max_total:raise AnalysisLimit('verifier total state limit')
         for row in rows:

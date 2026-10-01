@@ -24,8 +24,8 @@ integrity auditing, reproduction, and three complementary validation paths:
 - `adversarial_crosscheck.py` uses production modules but regenerates small cases and
   exact optima rather than reading frozen expected answers;
 - `standalone_oracle.py` intentionally does **not** import the production `dataflow`
-  package and independently parses, admits, interprets, encodes, decodes, and checks
-  every retained finite campaign case;
+  package and uses a separately written strict admission path before independently
+  interpreting, encoding, decoding, and checking every retained finite campaign case;
 - `reviewer_stress.py` does not call the frozen input generator and creates fresh
   mapping shapes for direct, swap, guard-renaming, equality, and upper-bound checks.
 
@@ -69,7 +69,11 @@ The production-coupled adversarial check covers 350 signed-OR count/witness case
 90 mapping pairs over 1,074 masks, 58 exact frontier optima, 566 codec/semantic cases,
 and 80 reduction instances over 16,720 masks. The standalone oracle replays 1,730
 pairs over 256,074 masks, 13,997 packet executions, and 218 reduction pairs over
-5,800 masks without importing production code. The post-freeze stress suite creates
+5,800 masks without importing production code. Its admission self-check accepts the
+valid structured example, reports the source and target peak as 48 payload bytes, and
+rejects seven focused mutations: payload capacity 48 to 47, control capacity 9 to 8,
+an invalid event permutation, a parent error, guard/operand and binding/operand
+mismatches, and a Boolean identifier. The post-freeze stress suite creates
 144 fresh pairs over 2,562 masks and performs 3,219 source/target-swap checks, 3,219
 guard-renaming checks, 192 exact-square/self-equality checks, and 96 upper-certificate
 checks. These are finite project-authored checks, not external replication or a
@@ -98,6 +102,11 @@ PYTHONPATH=src python3 -m dataflow check-upper examples/structured.json --certif
 PYTHONPATH=src python3 -m dataflow check-upper examples/structured.json --certificate examples/structured-zero-bound-certificate.json --bound 0
 PYTHONPATH=src python3 -m dataflow trace examples/structured.json --mask 3
 ```
+
+For the shipped upper certificate, `--max-layer 1` is a legal analysis budget that is
+too small and therefore returns JSON status `unresolved` with exit 2. Raising the same
+budget to `--max-layer 3` accepts the certificate. A structurally or mathematically
+damaged certificate remains `rejected` with exit 1 when the budget is sufficient.
 
 An upper bound is target bytes minus source bytes at the selected hierarchy edge.
 The checker receives the requested bound independently of the certificate. A loose
@@ -151,6 +160,15 @@ traffic, the signed signature, and the Max-Cut closed form. Equality scaling tim
 measure only the exact squared-count phase, not parsing, admission, extraction, or
 checker recomputation.
 
+The complexity statement is quantified as follows: deciding whether every legal mask
+satisfies target-minus-source traffic `<= 0` is coNP-complete, while the complementary
+question of whether some legal mask has positive difference is NP-complete. The
+interchange-only `cut_graph` tests cover one adjacent swap per edge. The complete
+threshold reduction also uses offset merges; the retained path-graph trace for edges
+`(0,1),(1,2)` and threshold 2 performs two interchanges and one merge, changes 16
+residencies to 15, reaches the generated target exactly, and remains admitted at an
+eight-byte payload peak after every step.
+
 The certificate benchmark records both compact and wide-frontier regimes. Grouped
 structured instances use 65 states / 1,052 serialized bytes at eight 2:4 groups and
 257 / 3,727 bytes at 32 groups. Interleaving the same eight groups uses 32,291 states
@@ -168,6 +186,9 @@ No neural accuracy, silicon energy, device timing, workload-wide speedup, cache-
 prediction, or production-compiler coverage is claimed. The producer and checker have
 separate frontier loops but share the written contract and Python runtime. The prose
 proofs are not proof-assistant developments, and all validation remains project-authored.
+The standalone oracle does not import production validation code, but it still shares
+the written IR contract, frozen JSON corpus, Python semantics, and host environment;
+those common trust boundaries are not presented as independently established facts.
 The hardness result fixes an eight-byte **payload** capacity and requested movement
 bound zero while control and program storage grow with the graph.
 

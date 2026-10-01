@@ -11,6 +11,7 @@ proof assistant.
 from __future__ import annotations
 
 import argparse
+import copy
 import itertools
 import json
 import math
@@ -30,6 +31,14 @@ CAMPAIGN = [
 ]
 MASK_LIMIT = 1_000_000
 MOD = 1 << 32
+MAX_GUARDS = 4096
+MAX_EVENTS = 65536
+MAX_SCOPES = 131072
+MAX_LEVELS = 4
+
+
+class AdmissionError(ValueError):
+    """Malformed or inadmissible finite-IR input in the standalone path."""
 
 
 def fail(message: object) -> None:
@@ -50,6 +59,274 @@ def load_jsonl(path: Path) -> list[dict]:
             except json.JSONDecodeError as exc:
                 raise AssertionError(f"{path}:{line_no}: {exc}") from exc
     return rows
+
+
+def reject(message: str) -> None:
+    raise AdmissionError(message)
+
+
+def exact_object(value, fields: set[str], label: str) -> dict:
+    if type(value) is not dict or set(value) != fields:
+        reject(f"{label}: unexpected or missing fields")
+    return value
+
+
+def bounded_list(value, maximum: int, label: str) -> list:
+    if type(value) is not list or len(value) > maximum:
+        reject(f"{label}: expected bounded list")
+    return value
+
+
+def bounded_int(value, lower: int, upper: int, label: str) -> int:
+    if type(value) is not int or not lower <= value <= upper:
+        reject(f"{label}: expected integer in [{lower}, {upper}]")
+    return value
+
+
+def reserved_bytes(scope: dict) -> int:
+    extent = scope["hi"] - scope["lo"]
+    return 8 + 8 * extent if scope["format"] == "coordinate" else 4 * extent
+
+
+def admit_pair(pair: dict) -> dict:
+    """Independently admit the documented finite IR without production imports.
+
+    This duplicates the prose contract in a separately written parser/validator:
+    exact fields and integer types, support/operand compatibility, event
+    permutations, hierarchy containment, half-open lifetimes, leaf bindings, and
+    payload/control capacity are all checked before any standalone interpretation.
+    """
+    exact_object(pair, {"kernel", "architecture", "source", "target"}, "pair")
+    kernel = exact_object(
+        pair["kernel"],
+        {"guards", "blocks", "tensors", "outputs", "events", "arithmetic"},
+        "kernel",
+    )
+    architecture = exact_object(pair["architecture"], {"capacity", "control_capacity"}, "architecture")
+
+    guards = bounded_int(kernel["guards"], 1, MAX_GUARDS, "guards")
+    if kernel["arithmetic"] != "mod32":
+        reject("arithmetic: only mod32 is implemented")
+    outputs = bounded_int(kernel["outputs"], 1, MAX_EVENTS, "outputs")
+
+    tensors = bounded_list(kernel["tensors"], 64, "tensors")
+    if not tensors:
+        reject("no tensors")
+    for tensor in tensors:
+        exact_object(tensor, {"length", "bytes", "support"}, "tensor")
+        length = bounded_int(tensor["length"], 1, 2**31 - 1, "tensor length")
+        if type(tensor["bytes"]) is not int or tensor["bytes"] != 4:
+            reject("mod32 tensor slots must have exactly 4 bytes")
+        if tensor["support"] is not None:
+            support = bounded_list(tensor["support"], MAX_EVENTS, "tensor support")
+            if len(support) != length:
+                reject("tensor support/length mismatch")
+            for guard in support:
+                bounded_int(guard, -1, guards - 1, "tensor support guard")
+
+    events = bounded_list(kernel["events"], MAX_EVENTS, "events")
+    if not events:
+        reject("empty kernel not in executable fragment")
+    for event_row in events:
+        exact_object(event_row, {"guard", "output", "reads"}, "event")
+        event_guard = bounded_int(event_row["guard"], -1, guards - 1, "event guard")
+        bounded_int(event_row["output"], 0, outputs - 1, "event output")
+        reads = bounded_list(event_row["reads"], 8, "event reads")
+        if not reads:
+            reject("empty product not in executable fragment")
+        for read in reads:
+            if type(read) is not list or len(read) != 2:
+                reject("read shape")
+            tensor_id = bounded_int(read[0], 0, len(tensors) - 1, "tensor index")
+            address = bounded_int(read[1], 0, tensors[tensor_id]["length"] - 1, "tensor address")
+            support = tensors[tensor_id]["support"]
+            if support is not None and support[address] >= 0 and support[address] != event_guard:
+                reject("event guard does not imply sparse operand presence")
+
+    blocks = bounded_list(kernel["blocks"], guards, "support blocks")
+    covered: set[int] = set()
+    for block in blocks:
+        exact_object(block, {"ids", "count"}, "support block")
+        ids = bounded_list(block["ids"], guards, "block ids")
+        if not ids:
+            reject("empty support block")
+        for guard in ids:
+            bounded_int(guard, 0, guards - 1, "block guard")
+            if guard in covered:
+                reject("overlapping or repeated block guard")
+            covered.add(guard)
+        if block["count"] is not None:
+            bounded_int(block["count"], 0, len(ids), "block count")
+    if covered != set(range(guards)):
+        reject("support blocks must partition all guards")
+
+    capacities = bounded_list(architecture["capacity"], MAX_LEVELS, "capacity")
+    if not capacities:
+        reject("no hierarchy levels")
+    for capacity in capacities:
+        bounded_int(capacity, 1, 2**40, "payload capacity")
+    control_capacity = bounded_int(architecture["control_capacity"], 1, 2**40, "control capacity")
+    if control_capacity < (guards + 7) // 8 + 4 * outputs:
+        reject("bitmap plus output accumulator reservation")
+
+    def admit_mapping(mapping: dict, label: str) -> dict:
+        exact_object(mapping, {"order", "scopes", "bindings"}, label)
+        event_count = len(events)
+        order = bounded_list(mapping["order"], event_count, f"{label} order")
+        if len(order) != event_count:
+            reject(f"{label}: event omission")
+        for event_id in order:
+            bounded_int(event_id, 0, event_count - 1, f"{label} order event")
+        if len(set(order)) != event_count:
+            reject(f"{label}: order is not an event permutation")
+        positions = [0] * event_count
+        for position, event_id in enumerate(order):
+            positions[event_id] = position
+
+        scopes = bounded_list(mapping["scopes"], MAX_SCOPES, f"{label} scopes")
+        if not scopes:
+            reject(f"{label}: no input residency")
+        changes: list[list[tuple[int, int]]] = [[] for _ in capacities]
+        packed_extent = 0
+        for scope in scopes:
+            exact_object(
+                scope,
+                {"tensor", "lo", "hi", "level", "begin", "end", "parent", "format"},
+                f"{label} scope",
+            )
+            tensor_id = bounded_int(scope["tensor"], 0, len(tensors) - 1, "scope tensor")
+            low = bounded_int(scope["lo"], 0, tensors[tensor_id]["length"] - 1, "scope lo")
+            bounded_int(scope["hi"], low + 1, tensors[tensor_id]["length"], "scope hi")
+            level = bounded_int(scope["level"], 0, len(capacities) - 1, "scope level")
+            begin = bounded_int(scope["begin"], 0, event_count - 1, "scope begin")
+            end = bounded_int(scope["end"], begin + 1, event_count, "scope end")
+            parent = bounded_int(scope["parent"], -1, len(scopes) - 1, "scope parent")
+            if (level == 0) != (parent == -1):
+                reject(f"{label}: root/parent mismatch")
+            if scope["format"] not in {"dense", "bitmap", "coordinate"}:
+                reject(f"{label}: unsupported tile format")
+            if scope["format"] != "dense" and tensors[tensor_id]["support"] is None:
+                reject(f"{label}: packed format requires an explicit support map")
+            if scope["format"] != "dense":
+                packed_extent += scope["hi"] - scope["lo"]
+            reservation = reserved_bytes(scope)
+            changes[level].append((begin, reservation))
+            changes[level].append((end, -reservation))
+        if packed_extent > 200_000:
+            reject(f"{label}: packed-record expansion admission limit")
+
+        for scope in scopes:
+            if scope["parent"] < 0:
+                continue
+            parent = scopes[scope["parent"]]
+            if parent["level"] != scope["level"] - 1:
+                reject(f"{label}: parent must be at the previous level")
+            if parent["tensor"] != scope["tensor"] or not (
+                parent["lo"] <= scope["lo"] < scope["hi"] <= parent["hi"]
+            ):
+                reject(f"{label}: parent tile does not contain child")
+            if not (parent["begin"] <= scope["begin"] < scope["end"] <= parent["end"]):
+                reject(f"{label}: parent lifetime does not contain child")
+
+        peak_payload = []
+        for level, level_changes in enumerate(changes):
+            live = high = 0
+            for _, delta in sorted(level_changes, key=lambda item: (item[0], 0 if item[1] < 0 else 1)):
+                live += delta
+                if live < 0:
+                    reject(f"{label}: negative residency accounting")
+                high = max(high, live)
+            if live != 0:
+                reject(f"{label}: unreleased residency")
+            if high > capacities[level]:
+                reject(f"{label}: payload capacity exceeded")
+            peak_payload.append(high)
+
+        bindings = bounded_list(mapping["bindings"], event_count, f"{label} bindings")
+        if len(bindings) != event_count:
+            reject(f"{label}: binding/event mismatch")
+        for event_id, event_row in enumerate(events):
+            row = bounded_list(bindings[event_id], 8, f"{label} operand bindings")
+            if len(row) != len(event_row["reads"]):
+                reject(f"{label}: binding/operand mismatch")
+            for read, scope_id in zip(event_row["reads"], row):
+                bounded_int(scope_id, 0, len(scopes) - 1, f"{label} binding scope")
+                scope = scopes[scope_id]
+                if scope["level"] != len(capacities) - 1 or scope["tensor"] != read[0] or not (
+                    scope["lo"] <= read[1] < scope["hi"]
+                ):
+                    reject(f"{label}: binding does not provide declared operand")
+                if not (scope["begin"] <= positions[event_id] < scope["end"]):
+                    reject(f"{label}: use outside lifetime")
+        return {
+            "peak_payload_bytes": peak_payload,
+            "event_count": event_count,
+            "scope_count": len(scopes),
+        }
+
+    return {
+        "source": admit_mapping(pair["source"], "source mapping"),
+        "target": admit_mapping(pair["target"], "target mapping"),
+    }
+
+
+def check_admission_mutations() -> dict:
+    """Exercise the independently implemented admission boundary on known faults."""
+    base = load_json(ROOT / "examples" / "structured.json")
+    if base["architecture"]["capacity"] != [48] or base["architecture"]["control_capacity"] != 9:
+        fail("structured admission fixture no longer has the audited 48-byte payload / 9-byte control limits")
+    admitted = admit_pair(base)
+    if admitted["source"]["peak_payload_bytes"] != [48] or admitted["target"]["peak_payload_bytes"] != [48]:
+        fail("structured admission fixture no longer reaches the audited 48-byte payload peak")
+
+    def set_payload_47(pair):
+        pair["architecture"]["capacity"][0] = 47
+
+    def set_control_8(pair):
+        pair["architecture"]["control_capacity"] = 8
+
+    def break_permutation(pair):
+        pair["source"]["order"][0] = pair["source"]["order"][1]
+
+    def break_parent(pair):
+        pair["source"]["scopes"][0]["parent"] = 1
+
+    def break_guard_operand(pair):
+        pair["kernel"]["events"][0]["guard"] = 1
+
+    def break_binding_operand(pair):
+        pair["source"]["bindings"][0][0] = 1
+
+    def break_type(pair):
+        pair["target"]["order"][0] = False
+
+    mutations = [
+        ("payload-capacity-48-to-47", set_payload_47, "payload capacity exceeded"),
+        ("control-capacity-9-to-8", set_control_8, "bitmap plus output accumulator reservation"),
+        ("event-order-permutation", break_permutation, "not an event permutation"),
+        ("parent-relation", break_parent, "root/parent mismatch"),
+        ("guard-operand", break_guard_operand, "event guard does not imply sparse operand presence"),
+        ("binding-operand", break_binding_operand, "binding does not provide declared operand"),
+        ("strict-integer-type", break_type, "expected integer"),
+    ]
+    rejected = []
+    for name, mutate, expected_reason in mutations:
+        candidate = copy.deepcopy(base)
+        mutate(candidate)
+        try:
+            admit_pair(candidate)
+        except AdmissionError as exc:
+            if expected_reason not in str(exc):
+                fail(("standalone admission rejected mutation for the wrong obligation", name, str(exc)))
+            rejected.append(name)
+        else:
+            fail(("standalone admission accepted mutation", name))
+    return {
+        "structured_source_peak_payload": admitted["source"]["peak_payload_bytes"],
+        "structured_target_peak_payload": admitted["target"]["peak_payload_bytes"],
+        "admission_mutations_rejected": len(rejected),
+        "admission_mutation_names": rejected,
+    }
 
 
 def legal_masks(kernel: dict, limit: int = MASK_LIMIT) -> Iterator[int]:
@@ -339,6 +616,7 @@ def check_campaign() -> dict:
             if input_row["case"] != frozen["case"]:
                 fail((part, "case order"))
             pair = input_row["pair"]
+            admit_pair(pair)
             kernel = pair["kernel"]
             masks = list(legal_masks(kernel))
             levels = len(pair["architecture"]["capacity"])
@@ -504,6 +782,7 @@ def check_reduction() -> dict:
         threshold = descriptor["threshold"]
         promise = descriptor["promise"]
         pair = threshold_pair(vertices, edges, threshold, promise)
+        admit_pair(pair)
         constant, terms = difference(pair, 0)
         deltas = []
         for mask in legal_masks(pair["kernel"]):
@@ -561,12 +840,14 @@ def publish(path: Path, report: dict) -> None:
 def run() -> dict:
     begin_wall = time.monotonic()
     begin_cpu = time.process_time()
+    admission = check_admission_mutations()
     campaign = check_campaign()
     reduction = check_reduction()
     use = resource.getrusage(resource.RUSAGE_SELF)
     return {
         "status": "passed",
         "implementation_imports": [],
+        **admission,
         **campaign,
         **reduction,
         "cpu_seconds": time.process_time() - begin_cpu,
