@@ -192,11 +192,6 @@ those common trust boundaries are not presented as independently established fac
 The hardness result fixes an eight-byte **payload** capacity and requested movement
 bound zero while control and program storage grow with the graph.
 
-AI assistance was used substantively for research design, proof development, code,
-input generation, tests, analysis, validation, and writing. The artifact makes no
-claim of human-only research or independent external review. Accountable human review
-of correctness, originality, authorship, and applicable publication policy remains
-required before external use.
 
 ## Files, references, and licensing
 
