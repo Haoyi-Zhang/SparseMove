@@ -42,6 +42,27 @@ def compare_json(observed_path: Path, expected_path: Path, label: str) -> dict:
     return observed
 
 
+def run_logged(command: list[str], label: str, output: Path, env: dict) -> subprocess.CompletedProcess:
+    """Keep captured output even on timeout; never turn a timeout into success."""
+    log = output / (label + ".log")
+    try:
+        result = subprocess.run(
+            command, cwd=ROOT, env=env, stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT, text=True, timeout=240, check=False,
+        )
+    except subprocess.TimeoutExpired as exc:
+        # TimeoutExpired may hold bytes even when subprocess.run uses text=True.
+        # Preserve those bytes rather than losing or silently re-decoding them.
+        partial = exc.stdout or b""
+        if isinstance(partial, bytes):
+            log.write_bytes(partial)
+        else:
+            log.write_text(partial, encoding="utf-8")
+        raise
+    log.write_text(result.stdout, encoding="utf-8")
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
@@ -91,17 +112,7 @@ def main() -> int:
     try:
         for label, command in commands:
             print("Running " + label, flush=True)
-            result = subprocess.run(
-                command,
-                cwd=ROOT,
-                env=env,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                timeout=240,
-                check=False,
-            )
-            (output / (label + ".log")).write_text(result.stdout, encoding="utf-8")
+            result = run_logged(command, label, output, env)
             if result.returncode:
                 raise RuntimeError(label + " failed with exit " + str(result.returncode))
             if label in {"standalone-oracle", "adversarial-crosscheck", "reviewer-stress"}:

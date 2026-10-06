@@ -15,10 +15,12 @@ implementation-bound arithmetic audit. `inputs/` retains every exact generated
 main-campaign pair and compact exact graph descriptors for the reduction campaign.
 `results/` contains all frozen observations, including unresolved controls.
 
-`tests/` contains 24 test methods, including 26 malformed-input mutations, 14
+`tests/` contains 27 test methods, including 26 malformed-input mutations, 14
 damaged-certificate mutations, a signed-64-bit boundary case, a shipped certificate
 example, packed-overfetch and hierarchy cases, and bounded exhaustive checks of the
-fixed-zero reduction. `scripts/` contains deterministic generation, measurements,
+fixed-zero reduction, constant-only counting, coordinate-field boundaries, and
+retention of captured output on reproduction timeouts.
+`scripts/` contains deterministic generation, measurements,
 integrity auditing, reproduction, and three complementary validation paths:
 
 - `adversarial_crosscheck.py` uses production modules but regenerates small cases and
@@ -46,7 +48,7 @@ From the repository root, with an output path that does not already exist:
 python3 scripts/reproduce.py --output /tmp/dataflow-reproduction
 ```
 
-The driver runs the artifact audit, 24 tests in normal mode and the same 24 under Python optimization, all three validation paths, and 15
+The driver runs the artifact audit, 27 tests in normal mode and the same 27 under Python optimization, all three validation paths, and 15
 scientific parts: nine main-campaign chunks, four scaling/ordering chunks, the
 fixed-zero reduction campaign, and the certificate-structure benchmark. It recreates
 all 1,730 main-campaign mapping pairs and all 218 reduction pairs. Every non-timing
@@ -54,7 +56,12 @@ scientific field is compared with the retained JSON; exact generated input bytes
 also compared. CPU time, wall time, and peak RSS are deliberately excluded from exact
 matching. Statuses, bounds, witnesses, state counts, charged operations, certificate
 structure, mask counts, and generated inputs are not. An unresolved result is never
-converted into success. Swap-event counts must remain zero.
+converted into success. Swap-event counts must remain zero. The retained full Linux
+reproduction used the earlier 24-method suite; the current three additional
+regressions and Windows library checks do not replace that historical record or
+establish a new Linux run. A child timeout retains its captured output in that
+child's log and still fails reproduction; it is never converted into a passing
+comparison.
 
 The three validation paths may also be run separately; each output path must not
 already exist:
@@ -87,6 +94,14 @@ python3 scripts/reproduce.py --output /tmp/dataflow-structured --parts structure
 
 Successful command execution is evidence of reproducibility, not by itself a proof
 of the general mathematical statements.
+
+The prepared `.github/workflows/scientific-checks.yml` uses this flat artifact
+directory as the repository root on Ubuntu 24.04. It runs the complete reproduction
+on pushes to `main`, pull requests targeting `main`, or manual dispatch, retains
+all comparison failures, and uploads raw output even on failure. Its job has a
+22-minute limit, with an 18-minute scientific-command deadline and a one-GiB
+address-space ceiling in addition to the driver's per-process limits. Preparing
+the workflow is not evidence that it has run on GitHub.
 
 ## Command-line example
 
@@ -134,6 +149,9 @@ conservatively even for an unused tile; duplicate live copies consume separate
 capacity. There is no implicit eviction, spill, recomputation, or prefetch. Dense,
 globally indexed bitmap-packed, and coordinate packets count different exact bytes.
 The global mask and dense outputs have separately reserved control memory.
+Coordinate tiles require `0 <= lo < hi <= 2**32` and `hi-lo <= 2**32-1`
+so all four-byte coordinate/header fields are representable. The executable
+length and explicit-support ceilings below imply stricter limits.
 Instruction storage, mask-distribution energy, conversion computation, and accumulator
 accesses are outside the payload-edge metric.
 

@@ -1,5 +1,6 @@
 """Self-contained validation of the declared IR and certificate boundary."""
-import copy,itertools,json,os,subprocess,sys,tempfile,unittest
+import copy,importlib.util,itertools,json,os,subprocess,sys,tempfile,unittest
+from unittest.mock import patch
 from pathlib import Path
 from dataflow import generate as G
 from dataflow.model import Invalid,validate_pair,difference,eval_difference,support_ok,signature
@@ -146,6 +147,51 @@ class Contract(unittest.TestCase):
         self.assertEqual(counter.square(c,t),sum(eval_difference(c,t,x)**2 for x in xs))
         cert=prove_upper(p);self.assertTrue(check_upper(p,cert,0,cert['bound'])['exact'])
 
+    def test_constant_and_empty_signatures(self):
+        k={'guards':4,'blocks':[{'ids':[0,1],'count':1},{'ids':[2,3],'count':None}]}
+        counter=Counter(k)
+        # An empty OR dictionary still incurs the domain-count operation.
+        budget=Budget(operations=2)
+        self.assertEqual(counter.square(0,[],budget=budget),0)
+        self.assertEqual(budget.used,2)
+        with self.assertRaises(AnalysisLimit):
+            counter.square(0,[],budget=Budget(operations=1))
+        self.assertEqual(counter.square(3,[]),9*8)
+        self.assertIsNone(counter.witness(0,[]))
+        witness=counter.witness(-3,[])
+        self.assertTrue(support_ok(k,witness))
+        self.assertEqual(eval_difference(-3,[],witness),-3)
+        p=G.structured(1)
+        p['target']=copy.deepcopy(p['source'])
+        self.assertEqual(difference(p),(0,[]))
+        self.assertTrue(check_equal(p,{'kind':'equal','level':0,'square_sum':0})['accepted'])
+
+    def test_coordinate_field_admission_boundaries(self):
+        # Check the executable length ceiling without allocating a huge tensor.
+        p=G.grid(2)
+        p['kernel']['tensors'][1]['length']=2**31-1
+        validate_pair(p)
+        p['kernel']['tensors'][1]['length']=2**31
+        with self.assertRaises(Invalid):validate_pair(p)
+        # Largest admitted explicit support array; encode only a two-slot tile
+        # at its upper end, including a maximal mod32 value.
+        n=65536
+        k={'guards':1,'blocks':[{'ids':[0],'count':None}],
+           'tensors':[{'length':n,'bytes':4,'support':[-1]*n}],
+           'outputs':1,'arithmetic':'mod32',
+           'events':[{'guard':-1,'output':0,'reads':[[0,address]]} for address in (n-2,n-1)]}
+        s={'tensor':0,'lo':n-2,'hi':n,'format':'coordinate',
+           'level':0,'begin':0,'end':2,'parent':-1}
+        m={'order':[0,1],'scopes':[s],'bindings':[[0],[0]]}
+        p={'kernel':k,'architecture':{'capacity':[24],'control_capacity':5},
+           'source':m,'target':copy.deepcopy(m)}
+        validate_pair(p)
+        values=[0]*n;values[-1]=2**32-1
+        raw=encode(k,s,0,values)
+        self.assertEqual(len(raw),24)
+        self.assertEqual(decode(k,s,0,raw),{n-2:0,n-1:2**32-1})
+        self.assertEqual(execute_resident(p,'source',0,[values]),([2**32-1],[29]))
+
     def test_upper_certificate_mutations(self):
         p=G.grid(3);original=prove_upper(p);B=original['bound']
         self.assertTrue(check_upper(p,original,0,B)['exact'])
@@ -290,6 +336,15 @@ class Contract(unittest.TestCase):
         with self.assertRaises(Invalid):check_upper(pair,certificate,0,2**63)
         broken=copy.deepcopy(certificate);broken['layers'][0][0][2]=2**63
         with self.assertRaises(Invalid):check_upper(pair,broken,0,bound)
+        loose=copy.deepcopy(certificate)
+        loose['bound']=2**63-1;loose['witness']=None
+        loose['layers'][-1][0][2]=2**63-1
+        checked=check_upper(pair,loose,0,2**63-1)
+        self.assertTrue(checked['accepted']);self.assertFalse(checked['exact'])
+        low=copy.deepcopy(certificate);low['bound']=-2**63;low['witness']=None
+        with self.assertRaisesRegex(Invalid,'terminal bound exceeded'):
+            check_upper(pair,low,0,-2**63)
+        with self.assertRaises(Invalid):check_upper(pair,certificate,0,-2**63-1)
 
 
     def test_rewrite_trace_validation(self):
@@ -360,5 +415,21 @@ class Contract(unittest.TestCase):
             with self.assertRaises(FileExistsError):save_json(str(p),{'value':2})
             self.assertEqual(read_json(str(p)),{'value':1})
             self.assertEqual(sorted(x.name for x in Path(d).iterdir()),['input.json','proof.json'])
+
+    def test_reproduction_timeout_output_retained(self):
+        spec=importlib.util.spec_from_file_location('reproduction_driver',ROOT/'scripts'/'reproduce.py')
+        driver=importlib.util.module_from_spec(spec);spec.loader.exec_module(driver)
+        with tempfile.TemporaryDirectory() as d:
+            out=Path(d);command=['owned-finite-check']
+            failure=subprocess.TimeoutExpired(command,240,output=b'partial output\xff\n')
+            with patch.object(driver.subprocess,'run',side_effect=failure):
+                with self.assertRaises(subprocess.TimeoutExpired):
+                    driver.run_logged(command,'limited',out,{})
+            self.assertEqual((out/'limited.log').read_bytes(),b'partial output\xff\n')
+            completed=subprocess.CompletedProcess(command,1,stdout='failed check\n')
+            with patch.object(driver.subprocess,'run',return_value=completed):
+                observed=driver.run_logged(command,'failed',out,{})
+            self.assertEqual(observed.returncode,1)
+            self.assertEqual((out/'failed.log').read_text(),'failed check\n')
 
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -239,7 +239,7 @@ def audit_python_sources() -> None:
         isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_")
         for node in ast.walk(test_tree)
     )
-    require(test_methods == 24, "expected 24 distinct unit-test methods")
+    require(test_methods == 27, "expected 27 distinct unit-test methods")
 
 
 def audit_content_hygiene() -> None:
@@ -452,7 +452,7 @@ def main() -> int:
         "manuscript_references": 73,
         "external_records": 78,
         "material_claims": 17,
-        "test_methods": 24,
+        "test_methods": 27,
     }
     print(json.dumps(report, sort_keys=True))
     return 0

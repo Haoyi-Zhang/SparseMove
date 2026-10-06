@@ -57,7 +57,10 @@ encoding and decoding traverse the same address interval and the same global mas
 so each emitted word is consumed at exactly its corresponding present position.
 Both place zero at the remaining positions. Coordinate encoding records the address
 and value at each present position, and its header records the interval start and
-record count. Decoding checks the header and each monotonically emitted address,
+record count. Coordinate tiles satisfy 0 <= lo < hi <= 2^32 and
+hi-lo <= 2^32-1; start, absolute addresses, and record count therefore fit
+the unsigned 32-bit fields. The executable tensor-length ceiling is stricter.
+Decoding checks the header and each monotonically emitted address,
 then returns its value and zeros elsewhere. There is neither a lossy numeric
 conversion nor an address renumbering. This proves all three cases. This law is for
 packets produced by these codecs, not arbitrary malformed external packets. QED.
@@ -126,8 +129,9 @@ Then
         + sum_A,B d_A d_B Z(A union B)
 
 is exactly sum_{S in Omega} f(S)^2. Therefore Q=0 if and only if f(S)=0 for every
-legal mask. Its computation uses O(m^2 (b+1)) elementary count/bitset operations,
-where b is the number of fixed blocks, and polynomial-length integers.
+legal mask. Its computation uses O((m+1)^2 (b+1)) elementary count/bitset operations,
+where b is the number of fixed blocks, and polynomial-length integers. The +1
+retains the constant-only case m=0, which still evaluates Z(empty).
 
 *Proof.* The choices in distinct fixed blocks and F are independent as combinatorial
 sets, so Z(A) counts the legal masks avoiding A. This is exact counting, not a
@@ -145,7 +149,7 @@ unions can be counted cheaply under the declared support promise and that exact
 residency traffic has a short signed-OR representation.
 
 **Corollary 5 (constructive non-equality).** A legal separating mask can be found
-in O(n m^2 (b+1)) count operations whenever Q>0.
+in O((n+1) (m+1)^2 (b+1)) count operations whenever Q>0.
 
 *Proof.* Maintain imposed-one set O and imposed-zero set R. To count masks avoiding
 A consistent with the prefix, return zero if A intersects O or O intersects R;
