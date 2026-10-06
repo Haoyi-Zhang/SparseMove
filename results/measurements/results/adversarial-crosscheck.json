@@ -1,0 +1,11 @@
+{
+  "counter_random_cases": 350,
+  "frontier_exact_checks": 58,
+  "literal_signature_mask_checks": 1074,
+  "mapping_random_cases": 90,
+  "reduction_mask_checks": 16720,
+  "reduction_random_cases": 80,
+  "resident_codec_checks": 566,
+  "seed": 20260919,
+  "status": "passed"
+}

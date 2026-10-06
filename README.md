@@ -1,9 +1,8 @@
 # Dataflow-equivalent mapping
 
-Exact, mask-conditioned byte comparison for a deliberately finite sparse-tensor
-residency contract. This is an internal research artifact, not a deployed compiler,
-hardware simulator, neural-network benchmark, cache simulator, or proof-assistant
-development.
+Exact, mask-conditioned byte comparison for a finite sparse-tensor residency
+contract. The implementation measures that contract rather than deployed compiler,
+hardware, neural-network, or cache performance.
 
 ## What is included
 
@@ -56,12 +55,16 @@ scientific field is compared with the retained JSON; exact generated input bytes
 also compared. CPU time, wall time, and peak RSS are deliberately excluded from exact
 matching. Statuses, bounds, witnesses, state counts, charged operations, certificate
 structure, mask counts, and generated inputs are not. An unresolved result is never
-converted into success. Swap-event counts must remain zero. The retained full Linux
-reproduction used the earlier 24-method suite; the current three additional
-regressions and Windows library checks do not replace that historical record or
-establish a new Linux run. A child timeout retains its captured output in that
-child's log and still fails reproduction; it is never converted into a passing
-comparison.
+converted into success. Swap-event counts must remain zero. The current Ubuntu
+24.04/Python 3.12 run passes all 27 methods in normal and optimized modes (2.683
+and 4.726 suite seconds), all three validation paths and all fifteen scientific
+parts. All ten regenerated input files match byte-for-byte; all 18 scientific
+JSON files and nine certificate rows match apart from timing/RSS fields. The
+driver records 86.787 wall seconds and 85.106 summed child CPU seconds; the
+largest recorded child RSS is 63,676 KiB, not an aggregate process-tree measure.
+These observations are retained separately in `results/measurements/`; historical
+data and timing tables are unchanged. A child timeout retains its captured
+output and still fails reproduction.
 
 The three validation paths may also be run separately; each output path must not
 already exist:
@@ -100,8 +103,9 @@ directory as the repository root on Ubuntu 24.04. It runs the complete reproduct
 on pushes to `main`, pull requests targeting `main`, or manual dispatch, retains
 all comparison failures, and uploads raw output even on failure. Its job has a
 22-minute limit, with an 18-minute scientific-command deadline and a one-GiB
-address-space ceiling in addition to the driver's per-process limits. Preparing
-the workflow is not evidence that it has run on GitHub.
+address-space ceiling in addition to the driver's per-process limits. Completed
+scientific and repository-integrity checks at run `37438884935`, head
+`914daa2ee479c0735293630374489debf0c83e65`, provide the native observation above.
 
 ## Command-line example
 

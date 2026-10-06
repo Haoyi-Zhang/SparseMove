@@ -1,0 +1,33 @@
+{
+  "admission_mutation_names": [
+    "payload-capacity-48-to-47",
+    "control-capacity-9-to-8",
+    "event-order-permutation",
+    "parent-relation",
+    "guard-operand",
+    "binding-operand",
+    "strict-integer-type"
+  ],
+  "admission_mutations_rejected": 7,
+  "campaign_levels": 1817,
+  "campaign_masks": 256074,
+  "campaign_pairs": 1730,
+  "cpu_seconds": 12.893646882999999,
+  "implementation_imports": [],
+  "max_reduction_events": 34,
+  "peak_rss_kib": 63676,
+  "reduction_masks": 5800,
+  "reduction_pairs": 218,
+  "resident_codec_masks": 13997,
+  "status": "passed",
+  "structured_source_peak_payload": [
+    48
+  ],
+  "structured_target_peak_payload": [
+    48
+  ],
+  "swap_events": 0,
+  "wall_seconds": 12.896413670000001,
+  "zero_bound_false": 192,
+  "zero_bound_true": 26
+}

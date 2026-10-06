@@ -1,0 +1,34 @@
+test_admission_mutations (test_contract.Contract.test_admission_mutations) ... ok
+test_cli_roundtrip (test_contract.Contract.test_cli_roundtrip) ... ok
+test_constant_and_empty_signatures (test_contract.Contract.test_constant_and_empty_signatures) ... ok
+test_coordinate_field_admission_boundaries (test_contract.Contract.test_coordinate_field_admission_boundaries) ... ok
+test_cross_oracle_small_family_properties (test_contract.Contract.test_cross_oracle_small_family_properties)
+Cross-check four independent views over diverse bounded families. ... ok
+test_density_null_and_cycle_control (test_contract.Contract.test_density_null_and_cycle_control) ... ok
+test_equality_requires_promise (test_contract.Contract.test_equality_requires_promise) ... ok
+test_exact_moment_and_witness (test_contract.Contract.test_exact_moment_and_witness) ... ok
+test_fixed_zero_maxcut_reduction (test_contract.Contract.test_fixed_zero_maxcut_reduction) ... ok
+test_format_rewrite_and_slot_interchange (test_contract.Contract.test_format_rewrite_and_slot_interchange) ... ok
+test_guard_order_permutations (test_contract.Contract.test_guard_order_permutations) ... ok
+test_hierarchy_parent_admission (test_contract.Contract.test_hierarchy_parent_admission) ... ok
+test_informational_statistics_not_trusted (test_contract.Contract.test_informational_statistics_not_trusted) ... ok
+test_json_duplicate_and_publication (test_contract.Contract.test_json_duplicate_and_publication) ... ok
+test_limits_are_unresolved (test_contract.Contract.test_limits_are_unresolved) ... ok
+test_merge_and_capacity_gap (test_contract.Contract.test_merge_and_capacity_gap) ... ok
+test_packed_overfetch_and_hierarchy_levels (test_contract.Contract.test_packed_overfetch_and_hierarchy_levels)
+Unused packed positions count only after a descendant triggers the tile. ... ok
+test_reproduction_timeout_output_retained (test_contract.Contract.test_reproduction_timeout_output_retained) ... ok
+test_rewrite_trace_validation (test_contract.Contract.test_rewrite_trace_validation) ... ok
+test_shipped_certificate_example (test_contract.Contract.test_shipped_certificate_example) ... ok
+test_signature_and_resident_codec (test_contract.Contract.test_signature_and_resident_codec) ... ok
+test_signed_64bit_certificate_boundary (test_contract.Contract.test_signed_64bit_certificate_boundary) ... ok
+test_split_header_negative_control (test_contract.Contract.test_split_header_negative_control) ... ok
+test_unconditional_events (test_contract.Contract.test_unconditional_events) ... ok
+test_upper_certificate_mutations (test_contract.Contract.test_upper_certificate_mutations) ... ok
+test_valid_loose_upper_certificate (test_contract.Contract.test_valid_loose_upper_certificate) ... ok
+test_zero_full_and_mixed_count_blocks (test_contract.Contract.test_zero_full_and_mixed_count_blocks) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 2.683s
+
+OK
