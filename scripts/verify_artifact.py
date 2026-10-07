@@ -205,6 +205,11 @@ def audit_python_sources() -> None:
     forbidden_calls = {"eval", "exec", "compile", "__import__"}
     for path in sorted(ROOT.rglob("*.py")):
         relative = path.relative_to(ROOT)
+        # The literal prefix oracle is local test support, not a dependency
+        # available to production sources or the standalone oracle.
+        permitted_local = local_roots | ({"frontier_reference"}
+            if relative.parts[0] == "tests" and (ROOT / "tests/frontier_reference.py").is_file()
+            else set())
         source = path.read_text(encoding="utf-8")
         try:
             tree = ast.parse(source, filename=str(relative))
@@ -222,7 +227,7 @@ def audit_python_sources() -> None:
             else:
                 modules = []
             for module in modules:
-                require(module in sys.stdlib_module_names or module in local_roots,
+                require(module in sys.stdlib_module_names or module in permitted_local,
                         f"non-standard dependency {module!r} in {relative}")
                 require(module not in forbidden_modules,
                         f"network/model/third-party import {module!r} in {relative}")
