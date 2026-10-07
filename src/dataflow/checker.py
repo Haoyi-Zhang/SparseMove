@@ -36,6 +36,12 @@ def check_upper(pair:dict,certificate:dict,level:int,bound:int,
     cb=[]
     for block in k['blocks']:
         if block['count'] is not None:cb.append(({rank[v] for v in block['ids']},block['count']))
+    # Admission makes blocks disjoint. Derive this index from our own positions,
+    # not the producer's owner/transition data; free positions remain None.
+    block_at=[None]*n
+    for j,(positions,_) in enumerate(cb):
+        for offset,t in enumerate(sorted(positions)):
+            block_at[t]=(j,len(positions)-offset-1)
     # Each layer describes the frontier immediately before order[layer].
     ff=[[j for j in range(len(terms)) if fstarts[j]<t<=fends[j]] for t in range(n+1)]
     bb=[[j for j,(ps,_) in enumerate(cb) if min(ps)<t<=max(ps)] for t in range(n+1)]
@@ -61,18 +67,17 @@ def check_upper(pair:dict,certificate:dict,level:int,bound:int,
     if tables[0]!={(0,()):0}:raise Invalid('initial potential')
     for t,v in enumerate(order):
         previous=ff[t];following=ff[t+1];closed=[j for j in range(len(terms)) if fends[j]==t]
+        affected=block_at[t]
         for (occupancy,count_tuple),value in tables[t].items():
             occupied={j for p,j in enumerate(previous) if occupancy&(1<<p)}
             counts=dict(zip(bb[t],count_tuple))
             for bit in [0,1]:
-                nextcounts=counts.copy();possible=True
-                for j,(positions,want) in enumerate(cb):
-                    if t in positions:
-                        now=counts.get(j,0)+bit
-                        left=len([z for z in positions if z>t])
-                        if now>want or now+left<want:possible=False;break
-                        nextcounts[j]=now
-                if not possible:continue
+                nextcounts=counts.copy()
+                if affected is not None:
+                    j,left=affected;want=cb[j][1]
+                    now=counts.get(j,0)+bit
+                    if now>want or now+left<want:continue
+                    nextcounts[j]=now
                 active=occupied.copy()
                 if bit:
                     active.update(j for j,maskpositions in enumerate(members) if t in maskpositions)
