@@ -14,7 +14,7 @@ implementation-bound arithmetic audit. `inputs/` retains every exact generated
 main-campaign pair and compact exact graph descriptors for the reduction campaign.
 `results/` contains all frozen observations, including unresolved controls.
 
-`tests/` contains 27 test methods, including 26 malformed-input mutations, 14
+`tests/` contains 37 test methods (27 original, seven frontier-reference, and three transformed-production regressions), including 26 malformed-input mutations, 14
 damaged-certificate mutations, a signed-64-bit boundary case, a shipped certificate
 example, packed-overfetch and hierarchy cases, and bounded exhaustive checks of the
 fixed-zero reduction, constant-only counting, coordinate-field boundaries, and
@@ -47,7 +47,7 @@ From the repository root, with an output path that does not already exist:
 python3 scripts/reproduce.py --output /tmp/dataflow-reproduction
 ```
 
-The driver runs the artifact audit, 27 tests in normal mode and the same 27 under Python optimization, all three validation paths, and 15
+The driver runs the artifact audit, 37 tests in normal mode and the same 37 under Python optimization, all three validation paths, and 15
 scientific parts: nine main-campaign chunks, four scaling/ordering chunks, the
 fixed-zero reduction campaign, and the certificate-structure benchmark. It recreates
 all 1,730 main-campaign mapping pairs and all 218 reduction pairs. Every non-timing
@@ -55,7 +55,7 @@ scientific field is compared with the retained JSON; exact generated input bytes
 also compared. CPU time, wall time, and peak RSS are deliberately excluded from exact
 matching. Statuses, bounds, witnesses, state counts, charged operations, certificate
 structure, mask counts, and generated inputs are not. An unresolved result is never
-converted into success. Swap-event counts must remain zero. The current Ubuntu
+converted into success. Swap-event counts must remain zero. The retained Ubuntu
 24.04/Python 3.12 run passes all 27 methods in normal and optimized modes (2.683
 and 4.726 suite seconds), all three validation paths and all fifteen scientific
 parts. All ten regenerated input files match byte-for-byte; all 18 scientific
@@ -76,7 +76,7 @@ python3 scripts/reviewer_stress.py --output /tmp/dataflow-stress.json
 ```
 
 The production-coupled adversarial check covers 350 signed-OR count/witness cases,
-90 mapping pairs over 1,074 masks, 58 exact frontier optima, 566 codec/semantic cases,
+90 mapping pairs over 1,074 mask–level comparisons, 58 exact frontier optima, 566 codec/semantic cases,
 and 80 reduction instances over 16,720 masks. The standalone oracle replays 1,730
 pairs over 256,074 masks, 13,997 packet executions, and 218 reduction pairs over
 5,800 masks without importing production code. Its admission self-check accepts the
@@ -85,7 +85,7 @@ rejects seven focused mutations: payload capacity 48 to 47, control capacity 9 t
 an invalid event permutation, a parent error, guard/operand and binding/operand
 mismatches, and a Boolean identifier. The post-freeze stress suite creates
 144 fresh pairs over 2,562 masks and performs 3,219 source/target-swap checks, 3,219
-guard-renaming checks, 192 exact-square/self-equality checks, and 96 upper-certificate
+guard-renaming checks. The current suite also compares production traffic and signed signatures for each transformed pair with the literal oracle. It retains 192 exact-square/self-equality checks, and 96 upper-certificate
 checks. These are finite project-authored checks, not external replication or a
 machine-checked general proof.
 

@@ -28,6 +28,7 @@ from dataflow.literal import traffic
 from dataflow.model import difference, eval_difference, validate_pair
 from dataflow.moment import Counter
 from dataflow.producer import prove_upper
+from dataflow.transformation_check import check_transformation
 
 SEED = 20260921
 CASE_COUNT = 144
@@ -295,6 +296,10 @@ def run() -> dict:
         renamed = rename_guards(pair, permutation)
         for mask in masks:
             renamed_mask = rename_mask(mask, permutation)
+            source_values = local_traffic(pair, "source", mask)
+            target_values = local_traffic(pair, "target", mask)
+            check_transformation(swapped, mask, target_values, source_values)
+            check_transformation(renamed, renamed_mask, source_values, target_values)
             for level in range(levels):
                 old_source = local_traffic(pair, "source", mask)[level]
                 old_target = local_traffic(pair, "target", mask)[level]

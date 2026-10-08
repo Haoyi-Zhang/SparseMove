@@ -239,12 +239,12 @@ def audit_python_sources() -> None:
         if relative == Path("scripts/standalone_oracle.py"):
             require(not production_imports,
                     "standalone oracle imports the production dataflow package")
-    test_tree = ast.parse((ROOT / "tests" / "test_contract.py").read_text(encoding="utf-8"))
     test_methods = sum(
         isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_")
-        for node in ast.walk(test_tree)
+        for path in sorted((ROOT / "tests").glob("test_*.py"))
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8")))
     )
-    require(test_methods == 27, "expected 27 distinct unit-test methods")
+    require(test_methods == 37, "expected 37 distinct unit-test methods")
 
 
 def audit_content_hygiene() -> None:
@@ -457,7 +457,7 @@ def main() -> int:
         "manuscript_references": 73,
         "external_records": 78,
         "material_claims": 17,
-        "test_methods": 27,
+        "test_methods": 37,
     }
     print(json.dumps(report, sort_keys=True))
     return 0
