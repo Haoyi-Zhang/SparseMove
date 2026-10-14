@@ -218,7 +218,7 @@ bound zero while control and program storage grow with the graph.
 ## Files, references, and licensing
 
 `claim_evidence_ledger.csv` maps each material claim to proofs, code, tests, and raw
-results. `external_resources.csv` records 73 manuscript sources and five
+results. `external_resources.csv` records 75 manuscript sources and five
 calibration-only sources. `reference_verification.csv` records identifier and scope
 checks; `reference_context_audit.csv` maps every manuscript key to its actual citation
 context and claim class. Metadata resolution is not represented as experimental

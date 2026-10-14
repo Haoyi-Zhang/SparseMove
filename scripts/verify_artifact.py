@@ -126,7 +126,7 @@ def audit_derived_csvs() -> None:
 
 def audit_ledgers() -> None:
     resources = read_csv(ROOT / "external_resources.csv")
-    require(len(resources) == 78, "external_resources.csv must contain 78 unique scholarly records")
+    require(len(resources) == 80, "external_resources.csv must contain 80 unique scholarly records")
     resource_ids = [row["resource_id"] for row in resources]
     require(len(resource_ids) == len(set(resource_ids)), "duplicate external resource id")
     require(all(row["title"].strip() and row["authors_or_owner"].strip() for row in resources),
@@ -136,27 +136,28 @@ def audit_ledgers() -> None:
     urls = [row["scholarly_or_official_url"].strip() for row in resources]
     require(len(urls) == len({url.casefold() for url in urls}), "duplicate scholarly identifier/URL")
     require(all(url.startswith("https://") for url in urls), "missing HTTPS resource URL")
-    require(sum(url.startswith("https://doi.org/10.") for url in urls) == 76,
-            "expected 76 DOI records")
+    require(sum(url.startswith("https://doi.org/10.") for url in urls) == 78,
+            "expected 78 DOI records")
     require(sum("usenix.org/conference/" in url for url in urls) == 2,
             "expected two official USENIX records")
-    require(all(row["access_date"] in {"2026-09-19", "2026-09-21"} for row in resources),
+    require(all(row["access_date"] in {"2026-09-19", "2026-09-21", "2026-10-15"} for row in resources),
             "unexpected resource access date")
     require(all(row["redistributed"] == "no" for row in resources),
             "a source is unexpectedly marked redistributed")
 
     verified = read_csv(ROOT / "reference_verification.csv")
-    require(len(verified) == 78 and {row["resource_id"] for row in verified} == set(resource_ids),
+    require(len(verified) == 80 and {row["resource_id"] for row in verified} == set(resource_ids),
             "reference verification/resource inventory mismatch")
     by_id = {row["resource_id"]: row for row in resources}
     require(all(row["metadata_source"] == by_id[row["resource_id"]]["scholarly_or_official_url"]
                 for row in verified), "verification source/inventory URL mismatch")
     manuscript_ids = {row["resource_id"] for row in verified if row["bibliography_role"] == "manuscript-cited"}
     calibration_ids = {row["resource_id"] for row in verified if row["bibliography_role"] == "calibration-only"}
-    require(len(manuscript_ids) == 73 and len(calibration_ids) == 5 and not manuscript_ids & calibration_ids,
-            "expected 73 manuscript references and five calibration-only records")
-    require(sum(row["substantive_scope_checked"].startswith("full paper") for row in verified) == 23,
-            "expected 23 full-paper calibration records")
+    require(len(manuscript_ids) == 75 and len(calibration_ids) == 5 and not manuscript_ids & calibration_ids,
+            "expected 75 manuscript references and five calibration-only records")
+    require(sum(row["substantive_scope_checked"].startswith("Focused full-text reading") for row in verified) == 2
+            and sum(row["substantive_scope_checked"].startswith("full paper") for row in verified) == 23,
+            "expected 23 full-paper records and two additional focused full-text records")
     allowed_status = {
         "official-record-checked",
         "doi-and-official-record-checked",
@@ -166,13 +167,13 @@ def audit_ledgers() -> None:
     require(all(row["metadata_status"] in allowed_status for row in verified),
             "unrecognized metadata verification status")
     require(all(row["identifier"].strip() for row in verified), "blank verified identifier")
-    require(len({row["identifier"].casefold() for row in verified}) == 78,
+    require(len({row["identifier"].casefold() for row in verified}) == 80,
             "duplicate verified identifier")
-    require(all(row["checked_date"] in {"2026-09-19", "2026-09-21"} for row in verified),
+    require(all(row["checked_date"] in {"2026-09-19", "2026-09-21", "2026-10-15"} for row in verified),
             "unexpected reference check date")
 
     contexts = read_csv(ROOT / "reference_context_audit.csv")
-    require(len(contexts) == 73, "reference context audit must cover every manuscript reference")
+    require(len(contexts) == 75, "reference context audit must cover every manuscript reference")
     require({row["resource_id"] for row in contexts} == manuscript_ids,
             "reference context audit and manuscript bibliography differ")
     require(len({row["resource_id"] for row in contexts}) == len(contexts),
@@ -181,7 +182,7 @@ def audit_ledgers() -> None:
             "blank citation-context evidence")
     require(all(row["scope_match"].startswith("checked:") for row in contexts),
             "unreviewed citation-context scope")
-    require(all(row["checked_date"] == "2026-09-21" for row in contexts),
+    require(all(row["checked_date"] in {"2026-09-21", "2026-10-15"} for row in contexts),
             "reference context audit is stale")
 
     claims = read_csv(ROOT / "claim_evidence_ledger.csv")
@@ -454,8 +455,8 @@ def main() -> int:
         "reduction_pairs": 218,
         "reduction_masks": 5800,
         "post_freeze_cases": 144,
-        "manuscript_references": 73,
-        "external_records": 78,
+        "manuscript_references": 75,
+        "external_records": 80,
         "material_claims": 17,
         "test_methods": 37,
     }
