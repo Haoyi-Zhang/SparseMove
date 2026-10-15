@@ -41,6 +41,20 @@ and its sequential children use one CPU, a 1 GiB address-space cap per process, 
 42/44 second soft/hard CPU limits. Each child has a 240-second wall timeout. A slower
 host may fail rather than silently relax the frozen envelope.
 
+For an untimed core check on Windows or Linux, without importing the POSIX-only
+CLI or campaign runner:
+
+```sh
+python -B tests/test_frontier_index.py
+python -B tests/test_transformed_production.py
+python -B scripts/verify_artifact.py
+```
+
+These commands check the seven frontier-reference methods, three transformed-
+production methods, and retained artifact consistency. They do not replace the
+complete 37-method suite or enforce the Linux runner's resource limits. The
+full suite imports the POSIX CLI and therefore still requires Linux.
+
 From the repository root, with an output path that does not already exist:
 
 ```sh
@@ -103,7 +117,7 @@ directory as the repository root on Ubuntu 24.04. It runs the complete reproduct
 on pushes to `main`, pull requests targeting `main`, or manual dispatch, retains
 all comparison failures, and uploads raw output even on failure. Its job has a
 22-minute limit, with an 18-minute scientific-command deadline and a one-GiB
-address-space ceiling in addition to the driver's per-process limits. Completed
+address-space ceiling in addition to the driver's per-process limits. Historical
 scientific and repository-integrity checks at run `37438884935`, head
 `914daa2ee479c0735293630374489debf0c83e65`, provide the native observation above.
 
@@ -233,5 +247,4 @@ without rerunning science.
 Source code, exact generated inputs, result data, and original prose proofs are
 supplied under the MIT license in `LICENSE`. No third-party research implementation
 or paper PDF is redistributed. Source attribution does not imply that an external
-baseline was executed. The artifact is anonymous, and no repository URL has been
-invented.
+baseline was executed. The license retains the anonymous contributor attribution.
