@@ -211,6 +211,9 @@ def audit_python_sources() -> None:
         permitted_local = local_roots | ({"frontier_reference"}
             if relative.parts[0] == "tests" and (ROOT / "tests/frontier_reference.py").is_file()
             else set())
+        # Rendering is an optional paper tool, separate from all scientific
+        # kernels and the independent standard-library oracle.
+        permitted_plotting = {"matplotlib"} if relative == Path("scripts/draw_schematics.py") else set()
         source = path.read_text(encoding="utf-8")
         try:
             tree = ast.parse(source, filename=str(relative))
@@ -228,7 +231,7 @@ def audit_python_sources() -> None:
             else:
                 modules = []
             for module in modules:
-                require(module in sys.stdlib_module_names or module in permitted_local,
+                require(module in sys.stdlib_module_names or module in permitted_local or module in permitted_plotting,
                         f"non-standard dependency {module!r} in {relative}")
                 require(module not in forbidden_modules,
                         f"network/model/third-party import {module!r} in {relative}")

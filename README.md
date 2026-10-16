@@ -35,6 +35,12 @@ GPU, compiler backend, or external scientific solver is required.
 
 ## Requirements and one-command reproduction
 
+The three conceptual manuscript figures are self-contained direct Python vectors.
+Install figure-only dependencies from `scripts/requirements-schematics.txt`,
+run `python scripts/draw_schematics.py`, and add `--check` to compare the
+embedded-font PDFs in `figures/`. The paper's wrappers consume these assets.
+The certificate library and scientific runner remain standard-library-only.
+
 Use Linux with Python 3.10 or later, a writable temporary directory, and roughly
 150 MiB of working storage. Only the Python standard library is imported. The driver
 and its sequential children use one CPU, a 1 GiB address-space cap per process, and
