@@ -213,7 +213,9 @@ def audit_python_sources() -> None:
             else set())
         # Rendering is an optional paper tool, separate from all scientific
         # kernels and the independent standard-library oracle.
-        permitted_plotting = {"matplotlib"} if relative == Path("scripts/draw_schematics.py") else set()
+        permitted_plotting = {"matplotlib"} if relative in {
+            Path("scripts/draw_schematics.py"), Path("scripts/plot_data.py")
+        } else set()
         source = path.read_text(encoding="utf-8")
         try:
             tree = ast.parse(source, filename=str(relative))
@@ -248,7 +250,7 @@ def audit_python_sources() -> None:
         for path in sorted((ROOT / "tests").glob("test_*.py"))
         for node in ast.walk(ast.parse(path.read_text(encoding="utf-8")))
     )
-    require(test_methods == 37, "expected 37 distinct unit-test methods")
+    require(test_methods == 38, "expected 38 distinct unit-test methods")
 
 
 def audit_content_hygiene() -> None:
@@ -461,7 +463,7 @@ def main() -> int:
         "manuscript_references": 75,
         "external_records": 80,
         "material_claims": 17,
-        "test_methods": 37,
+        "test_methods": 38,
     }
     print(json.dumps(report, sort_keys=True))
     return 0

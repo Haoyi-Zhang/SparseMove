@@ -14,7 +14,7 @@ implementation-bound arithmetic audit. `inputs/` retains every exact generated
 main-campaign pair and compact exact graph descriptors for the reduction campaign.
 `results/` contains all frozen observations, including unresolved controls.
 
-`tests/` contains 37 test methods (27 original, seven frontier-reference, and three transformed-production regressions), including 26 malformed-input mutations, 14
+`tests/` contains 38 test methods (27 original, seven frontier-reference, three transformed-production, and one plotting-boundary regression), including 26 malformed-input mutations, 14
 damaged-certificate mutations, a signed-64-bit boundary case, a shipped certificate
 example, packed-overfetch and hierarchy cases, and bounded exhaustive checks of the
 fixed-zero reduction, constant-only counting, coordinate-field boundaries, and
@@ -65,7 +65,7 @@ python -B scripts/verify_artifact.py
 
 These commands check the seven frontier-reference methods, three transformed-
 production methods, and retained artifact consistency. They do not replace the
-complete 37-method suite or enforce the Linux runner's resource limits. The
+complete 38-method suite or enforce the Linux runner's resource limits. The
 full suite imports the POSIX CLI and therefore still requires Linux.
 
 From the repository root, with an output path that does not already exist:
@@ -74,7 +74,7 @@ From the repository root, with an output path that does not already exist:
 python3 scripts/reproduce.py --output /tmp/dataflow-reproduction
 ```
 
-The driver runs the artifact audit, 37 tests in normal mode and the same 37 under Python optimization, all three validation paths, and 15
+The driver runs the artifact audit, 38 tests in normal mode and the same 38 under Python optimization, all three validation paths, and 15
 scientific parts: nine main-campaign chunks, four scaling/ordering chunks, the
 fixed-zero reduction campaign, and the certificate-structure benchmark. It recreates
 all 1,730 main-campaign mapping pairs and all 218 reduction pairs. Every non-timing
