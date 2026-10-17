@@ -39,6 +39,13 @@ The three conceptual manuscript figures are self-contained direct Python vectors
 Install figure-only dependencies from `scripts/requirements-schematics.txt`,
 run `python scripts/draw_schematics.py`, and add `--check` to compare the
 embedded-font PDFs in `figures/`. The paper's wrappers consume these assets.
+
+The numeric figures use `python scripts/plot_data.py --output ../paper/figures`
+when the companion paper directory is present. The same script defaults to
+`figures/` for a standalone artifact. It reads the completed rows in
+`results/equality-plot.csv` and certified rows in `results/cliques.csv`, checks
+their status and ranges, and writes embedded-font vector PDFs directly in
+Python, without a TeX labeling pass or a new measurement run.
 The certificate library and scientific runner remain standard-library-only.
 
 Use Linux with Python 3.10 or later, a writable temporary directory, and roughly
