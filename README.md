@@ -261,3 +261,7 @@ Source code, exact generated inputs, result data, and original prose proofs are
 supplied under the MIT license in `LICENSE`. No third-party research implementation
 or paper PDF is redistributed. Source attribution does not imply that an external
 baseline was executed. The license retains the anonymous contributor attribution.
+
+## Source repository
+
+[SparseMove](https://github.com/Haoyi-Zhang/SparseMove)
